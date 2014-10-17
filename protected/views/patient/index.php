@@ -2,19 +2,21 @@
 /* @var $this PatientController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Patients',
+$this->breadcrumbs = array(
+    'Patients',
 );
 
-$this->menu=array(
-	array('label'=>'Create Patient', 'url'=>array('create')),
-	array('label'=>'Manage Patient', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Create Patient', 'url' => array('create')),
+    array('label' => 'Manage Patient', 'url' => array('admin')),
 );
 ?>
 
 <h1>Patients</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<?php
+$this->widget('zii.widgets.CListView', array(
+    'dataProvider' => $dataProvider,
+    'itemView' => '_view',
+));
+?>

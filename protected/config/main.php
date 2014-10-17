@@ -6,16 +6,18 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'My Web Application',
+    'name' => 'CBSD - Serveur d\'Identité Patient',
+    'defaultController' => 'site/login',
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
+        'application.models.wsModels.*',
         'application.components.*',
     ),
     'modules' => array(
-        // uncomment the following to enable the Gii tool
+// uncomment the following to enable the Gii tool
 
         'gii' => array(
             'class' => 'system.gii.GiiModule',
@@ -27,33 +29,22 @@ return array(
     // application components
     'components' => array(
         'user' => array(
-            // enable cookie-based authentication
+// enable cookie-based authentication
             'allowAutoLogin' => true,
+            'class' => 'WebUser'
         ),
-        // uncomment the following to enable URLs in path-format
-        /*
-          'urlManager'=>array(
-          'urlFormat'=>'path',
-          'rules'=>array(
-          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-          ),
-          ),
-         */
-        /* 'db' => array(
-          'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
-          ), */
-        // uncomment the following to use a MySQL database
+        'cache' => array(
+            'class' => 'system.caching.CApcCache'
+        ),
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=SIP',
+            'connectionString' => CommonProperties::$CONNECTION_STRING,
             'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => 'root',
+            'username' => CommonProperties::$CONNECTION_USERNAME,
+            'password' => CommonProperties::$CONNECTION_PASSWORD,
             'charset' => 'utf8',
         ),
         'errorHandler' => array(
-            // use 'site/error' action to display errors
+// use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(
@@ -73,9 +64,9 @@ return array(
         ),
     ),
     // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
+// using Yii::app()->params['paramName']
     'params' => array(
-        // this is used in contact page
-        'adminEmail' => 'webmaster@example.com',
+// this is used in contact page
+        'adminEmail' => CommonProperties::$ADMIN_EMAIL,
     ),
 );

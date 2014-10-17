@@ -1,0 +1,1 @@
+to enable soap webservices, please disable caching for soap wsdl in your php.ini
