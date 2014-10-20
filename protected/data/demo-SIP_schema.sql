@@ -31,12 +31,12 @@ CREATE TABLE `Patient` (
   `source` int(11) NOT NULL,
   `sex` varchar(45) NOT NULL,
   `sourceId` varchar(45) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_Patient_Sources1_idx` (`source`),
-  CONSTRAINT `fk_Patient_Sources1` FOREIGN KEY (`source`) REFERENCES `Sources` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--  KEY `fk_Patient_Sources1_idx` (`source`),
+--  CONSTRAINT `fk_Patient_Sources1` FOREIGN KEY (`source`) REFERENCES `Sources` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 --
 -- Table structure for table `Rapprochement`
 --
