@@ -5,9 +5,10 @@
  * It contains the authentication method that checks if the provided
  * data can identity the user.
  */
-class UserIdentity extends CUserIdentity
-{
+class UserIdentity extends CUserIdentity {
+
     const ERROR_INACTIVE = 3;
+
     private $id;
 
     /**
@@ -19,7 +20,6 @@ class UserIdentity extends CUserIdentity
      */
     public function authenticate() {
         $record = User::model()->findByAttributes(array('login' => $this->username));
-        //echo $record->password;
         if ($record == null)
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         elseif ($record->password != $this->password)
@@ -31,7 +31,6 @@ class UserIdentity extends CUserIdentity
             $this->setState('profil', $record->profil);
             //on stocke le numero de biobanque associée si non null pour checker ensuite si admin bioban
         }
-        echo $this->errorCode;
         return $this->errorCode;
     }
 
