@@ -15,9 +15,26 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- --
+-- -- Dumping data for table `users`
+-- --
+-- 
+-- LOCK TABLES `users` WRITE;
+-- /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'PENICAUD','Matthieu','1','matth','guizmo'),(3,'MALSERVET','Nicolas','1','nmalservet','bbadmin'),(4,'webapp','cerveau','2','cbsd_cer','cerWA'),(5,'webapp','adn','2','cbsd_adn','adnWA'),(6,'admin','cerveau','3','admin_cer','cerAdm'),(7,'admin','adn','3','admin_adn','adnAdm');
+-- /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+-- UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 --
 -- Dumping data for table `Patient`
 --
+-- LOCK TABLES `Sources` WRITE;
+-- /*!40000 ALTER TABLE `Sources` DISABLE KEYS */;
+ INSERT INTO `Sources` VALUES (1,'bb_cerveau',NULL,6,4),(2,'bb_adn',NULL,7,5);
+-- /*!40000 ALTER TABLE `Sources` ENABLE KEYS */;
+-- UNLOCK TABLES;
+-- 
 
 LOCK TABLES `Patient` WRITE;
 /*!40000 ALTER TABLE `Patient` DISABLE KEYS */;
@@ -31,30 +48,13 @@ UNLOCK TABLES;
 
 -- LOCK TABLES `Rapprochement` WRITE;
 -- /*!40000 ALTER TABLE `Rapprochement` DISABLE KEYS */;
--- INSERT INTO `Rapprochement` VALUES (1,1306846,1005340,'2'),(2,1506687,1005340,'1'),(3,1521719,1005340,'1'),(4,1609233,1005340,'0'),(8,1091768,1044782,'0'),(9,1855766,1044782,'2'),(11,1855766,1091768,'2'),(12,1730633,1223183,'0'),(13,1892172,1234548,'1'),(14,1501890,1276602,'0'),(15,1792784,1276602,'2'),(16,1322005,1276602,'2'),(17,1455944,1276602,'0'),(21,1607672,1305071,'0'),(22,1506687,1306846,'0'),(23,1521719,1306846,'0'),(24,1609233,1306846,'0'),(25,1501890,1322005,'2'),(26,1792784,1322005,'0'),(28,1923669,1339493,'0'),(29,1615650,1441150,'2'),(30,1792784,1455944,'0'),(31,1501890,1455944,'1'),(33,1840910,1459596,'0'),(34,1792784,1501890,'2'),(35,1521719,1506687,'0'),(36,1609233,1506687,'0'),(38,1609233,1521719,'0'),(39,1777137,1707574,'0');
+INSERT INTO `Rapprochement` VALUES (1,1306846,1005340,'2'),(2,1506687,1005340,'1'),(3,1521719,1005340,'1'),(4,1609233,1005340,'0'),(8,1091768,1044782,'0'),(9,1855766,1044782,'2'),(11,1855766,1091768,'2'),(12,1730633,1223183,'0'),(13,1892172,1234548,'1'),(14,1501890,1276602,'0'),(15,1792784,1276602,'2'),(16,1322005,1276602,'2'),(17,1455944,1276602,'0'),(21,1607672,1305071,'0'),(22,1506687,1306846,'0'),(23,1521719,1306846,'0'),(24,1609233,1306846,'0'),(25,1501890,1322005,'2'),(26,1792784,1322005,'0'),(28,1923669,1339493,'0'),(29,1615650,1441150,'2'),(30,1792784,1455944,'0'),(31,1501890,1455944,'1'),(33,1840910,1459596,'0'),(34,1792784,1501890,'2'),(35,1521719,1506687,'0'),(36,1609233,1506687,'0'),(38,1609233,1521719,'0'),(39,1777137,1707574,'0');
 -- /*!40000 ALTER TABLE `Rapprochement` ENABLE KEYS */;
 -- UNLOCK TABLES;
 
 --
 -- Dumping data for table `Sources`
 --
-
--- LOCK TABLES `Sources` WRITE;
--- /*!40000 ALTER TABLE `Sources` DISABLE KEYS */;
--- INSERT INTO `Sources` VALUES (1,'bb_cerveau',NULL,6,4),(2,'bb_adn',NULL,7,5);
--- /*!40000 ALTER TABLE `Sources` ENABLE KEYS */;
--- UNLOCK TABLES;
--- 
--- --
--- -- Dumping data for table `users`
--- --
--- 
--- LOCK TABLES `users` WRITE;
--- /*!40000 ALTER TABLE `users` DISABLE KEYS */;
--- INSERT INTO `users` VALUES (2,'PENICAUD','Matthieu','1','matth','guizmo'),(3,'MALSERVET','Nicolas','1','nmalservet','bbadmin'),(4,'webapp','cerveau','2','cbsd_cer','cerWA'),(5,'webapp','adn','2','cbsd_adn','adnWA'),(6,'admin','cerveau','3','admin_cer','cerAdm'),(7,'admin','adn','3','admin_adn','adnAdm');
--- /*!40000 ALTER TABLE `users` ENABLE KEYS */;
--- UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

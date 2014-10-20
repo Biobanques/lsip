@@ -15,6 +15,42 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- DROP TABLE IF EXISTS `users`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!40101 SET character_set_client = utf8 */;
+ CREATE TABLE `users` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `nom` varchar(45) DEFAULT NULL,
+   `prenom` varchar(45) DEFAULT NULL,
+   `profil` varchar(45) NOT NULL,
+   `login` varchar(45) NOT NULL,
+   `password` varchar(45) NOT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Table structure for table `Sources`
+--
+
+-- DROP TABLE IF EXISTS `Sources`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!40101 SET character_set_client = utf8 */;
+ CREATE TABLE `Sources` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `name` varchar(45) NOT NULL,
+   `passphrase` varchar(45) DEFAULT NULL,
+   `admin` int(11) NOT NULL,
+   `webapp` int(11) NOT NULL,
+   PRIMARY KEY (`id`),
+  KEY `fk_Sources_1_idx` (`admin`),
+   KEY `fk_Sources_2_idx` (`webapp`),
+   CONSTRAINT `fk_Sources_1` FOREIGN KEY (`admin`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT `fk_Sources_2` FOREIGN KEY (`webapp`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+
 --
 -- Table structure for table `Patient`
 --
@@ -31,12 +67,13 @@ CREATE TABLE `Patient` (
   `source` int(11) NOT NULL,
   `sex` varchar(45) NOT NULL,
   `sourceId` varchar(45) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_Patient_Sources1_idx` (`source`),
+  CONSTRAINT `fk_Patient_Sources1` FOREIGN KEY (`source`) REFERENCES `Sources` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---  KEY `fk_Patient_Sources1_idx` (`source`),
---  CONSTRAINT `fk_Patient_Sources1` FOREIGN KEY (`source`) REFERENCES `Sources` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
 --
 -- Table structure for table `Rapprochement`
 --
@@ -57,45 +94,12 @@ CREATE TABLE `Rapprochement` (
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `Sources`
---
-
--- DROP TABLE IF EXISTS `Sources`;
--- /*!40101 SET @saved_cs_client     = @@character_set_client */;
--- /*!40101 SET character_set_client = utf8 */;
--- CREATE TABLE `Sources` (
---   `id` int(11) NOT NULL AUTO_INCREMENT,
---   `name` varchar(45) NOT NULL,
---   `passphrase` varchar(45) DEFAULT NULL,
---   `admin` int(11) NOT NULL,
---   `webapp` int(11) NOT NULL,
---   PRIMARY KEY (`id`),
---   KEY `fk_Sources_1_idx` (`admin`),
---   KEY `fk_Sources_2_idx` (`webapp`),
---   CONSTRAINT `fk_Sources_1` FOREIGN KEY (`admin`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
---   CONSTRAINT `fk_Sources_2` FOREIGN KEY (`webapp`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
--- ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
--- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `users`
 --
 
--- DROP TABLE IF EXISTS `users`;
--- /*!40101 SET @saved_cs_client     = @@character_set_client */;
--- /*!40101 SET character_set_client = utf8 */;
--- CREATE TABLE `users` (
---   `id` int(11) NOT NULL AUTO_INCREMENT,
---   `nom` varchar(45) DEFAULT NULL,
---   `prenom` varchar(45) DEFAULT NULL,
---   `profil` varchar(45) NOT NULL,
---   `login` varchar(45) NOT NULL,
---   `password` varchar(45) NOT NULL,
---   PRIMARY KEY (`id`)
--- ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
