@@ -23,7 +23,6 @@ $this->breadcrumbs = array(
         ),
     ));
     ?>
-
     <p class="note">Fields with <span class="required">*</span> are required.</p>
 
     <div class="row">

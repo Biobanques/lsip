@@ -1,68 +1,51 @@
 <?php /* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="fr" />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+       <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl;; ?>/css/styles.css" />
+       <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<?php Yii::app()->bootstrap->register(); ?>
+</head>
 
-        <!-- blueprint CSS framework -->
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-        <!--[if lt IE 8]>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-        <![endif]-->
+<body>
 
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+<?php
+$this->widget('bootstrap.widgets.TbNavbar',array(
+    'items'=>array(
+        array(
+            'class'=>'bootstrap.widgets.TbMenu',
+            'items'=>array(
+                array('label' => 'Manage patients', 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isAdmin()),
+                array('label' => 'Manage rapprochements', 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
+                array('label' => 'Manage fusions', 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin()),
+                array('label' => 'Detect rapprochement', 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),      
+                array('label'=>'Se connecter', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+                array('label'=>'Se déconnecter ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+            ),
+        ),
+    ),
+)); ?>
 
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-    </head>
+<div class="container" id="page">
+	<?php if(isset($this->breadcrumbs)):?>
+		<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+			'links'=>$this->breadcrumbs,
+		)); ?><!-- breadcrumbs -->
+	<?php endif?>
+                
+	<?php echo $content; ?>
 
-    <body>
+	<div class="clear"></div>
 
-        <div class="container" id="page">
+	<div id="footer">
+		Copyright &copy; <?php echo date('Y'); ?> by Biobanques.<br/>
+		All Rights Reserved.<br/>
+		<?php echo Yii::powered(); ?>
+	</div><!-- footer -->
 
-            <div id="header">
-                <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-            </div><!-- header -->
+</div><!-- page -->
 
-            <div id="mainmenu">
-                <?php
-                $this->widget('zii.widgets.CMenu', array(
-                    'items' => array(
-                        //  array('label' => 'Home', 'url' => array('/site/index')),
-                        //  array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-                        //  array('label' => 'Contact', 'url' => array('/site/contact')),
-                        array('label' => 'Manage patients', 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isAdmin()),
-                        array('label' => 'Manage rapprochements', 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
-                        array('label' => 'Manage fusions', 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin()),
-                        array('label' => 'Detect rapprochement', 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
-                        //array('label' => 'Contact', 'url' => array('/site/contact')),
-                        array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                        array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-                    ),
-                ));
-                ?>
-            </div><!-- mainmenu -->
-            <?php if (isset($this->breadcrumbs)): ?>
-                <?php
-                $this->widget('zii.widgets.CBreadcrumbs', array(
-                    'links' => $this->breadcrumbs,
-                ));
-                ?><!-- breadcrumbs -->
-            <?php endif ?>
-
-            <?php echo $content; ?>
-
-            <div class="clear"></div>
-
-            <div id="footer">
-                Copyright &copy; <?php echo date('Y'); ?> by Biobanques.<br/>
-                All Rights Reserved.<br/>
-                <?php echo Yii::powered(); ?>
-            </div><!-- footer -->
-
-        </div><!-- page -->
-
-    </body>
+</body>
 </html>

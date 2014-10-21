@@ -1,7 +1,6 @@
 <?php
 
-class SiteController extends Controller
-{
+class SiteController extends Controller {
 
     /**
      * Declares class-based actions.
@@ -42,8 +41,6 @@ class SiteController extends Controller
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-// renders the view file 'protected/views/site/index.php'
-// using the default layout 'protected/views/layouts/main.php'
         $user = User::model()->findByPk(Yii::app()->user->getId());
         $this->render('index', array('user' => $user));
     }
@@ -90,21 +87,19 @@ class SiteController extends Controller
         $model = new LoginForm;
 
 // if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+       /* if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }
+        }*/
 
 // collect user input data
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
 // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login()) {
-
+            if ($model->validate()&& $model->login()) {
                 $this->redirect(Yii::app()->createUrl('site/index'));
-            }
+            } 
         }
-// display the login form
         $this->render('login', array('model' => $model));
     }
 
