@@ -95,9 +95,142 @@ CREATE TABLE `Rapprochement` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
---
--- Table structure for table `users`
---
+DELIMITER $$
+CREATE PROCEDURE `detect_rapprochement2`(
+IN id int
+,IN birthName varchar(45)
+, IN useName varchar (255)
+, IN firstName varchar (255)
+, IN birthDate datetime
+, IN origine int
+, IN sex varchar (255)
+, IN sourceId varchar(45)
+
+)
+BEGIN
+DROP temporary table  if exists tempPat;
+DROP temporary table  if exists   tempPat2;
+#5 criteres
+create temporary table tempPat as 
+select * from Patient p where(
+p.birthName = birthName
+AND p.useName = useName
+AND p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+# 4 criteres
+UNION
+select * from Patient p where (
+p.useName = useName
+AND p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+
+AND p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.useName = useName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.useName = useName
+AND p.firstName = firstName
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.useName = useName
+AND p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+)
+#3 criteres
+UNION
+select  * from Patient p where (
+p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.useName = useName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+ p.useName = useName
+AND p.firstName = firstName
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+ p.useName = useName
+AND p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.firstName = firstName
+AND p.sex = sex
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.firstName = firstName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+)
+#UNION
+#select * from Patient p where (
+#p.birthName = birthName
+#AND p.useName = useName
+#AND p.sex = sex
+#)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.useName = useName
+AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+)
+UNION
+select * from Patient p where (
+p.birthName = birthName
+AND p.useName = useName
+AND p.firstName = firstName
+)
+;
+/*
+select  id from Patient p where (p.source!=source AND
+YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
+);
+*/
+
+create temporary table   tempPat2 as
+select tp.id from tempPat tp where tp.id not in (select idPat1 from Rapprochement where idPat2=id union select idPat2 from Rapprochement where idPat1 = id union select id from Patient p where p.id = id);
+
+insert into Rapprochement (idPat1, idPat2) (select tp2.id,id from   tempPat2 tp2);
+END$$
+DELIMITER ;
+
 
 
 

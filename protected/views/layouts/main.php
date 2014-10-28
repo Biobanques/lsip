@@ -7,6 +7,15 @@
        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl;; ?>/css/styles.css" />
        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	<?php Yii::app()->bootstrap->register(); ?>
+       <!-- bootstrap CDN includes-->
+       <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -29,12 +38,7 @@ $this->widget('bootstrap.widgets.TbNavbar',array(
 )); ?>
 
 <div class="container" id="page">
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
-                
+	        
 	<?php echo $content; ?>
 
 	<div class="clear"></div>

@@ -70,10 +70,13 @@ class RapprochementController extends Controller
             $id = $_POST['Rapprochement']['idRapprochement'];
             $value = $_POST['Rapprochement']['value'];
         }
-
-        $model = $this->loadModel($id);
-        $model->validated = $value;
-        $model->save();
+        try {
+            $model = $this->loadModel($id);
+            $model->validated = $value;
+            $model->save();
+        } catch (Exception $exc) {
+            Yii::log($exc->getMessage(), CLogger::LEVEL_ERROR);
+        }
 //        Yii::app()->user->returnUrl = Yii::app()->request->urlReferrer;
 //        $this->redirect(Yii::app()->user->returnUrl);
         Yii::app()->end();
@@ -93,6 +96,10 @@ class RapprochementController extends Controller
             $model->attributes = $_POST['Rapprochement'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->idRapprochement));
+            else {
+                Yii::app()->user->setMessage('error', Yii::t('common', 'notAdded'));
+                Yii::log("Une erreur est survenue pendant l'enregtistrement d'un rapprochement.", CLogger::LEVEL_ERROR);
+            }
         }
 
 
@@ -158,15 +165,6 @@ class RapprochementController extends Controller
             $this->validate($id, $value);
         }
         $dataProvider = $model->getRapprochements();
-//        if (isset($_GET['ajax'])){
-//            $this->render('indexRapprochements', array(
-//            'dataProvider' => $dataProvider,
-//            'test' => $test
-//        ));
-//
-//            $test = 'ok';
-//        }else
-//            $test = 'ko';
 
         $this->render('indexRapprochements', array(
             'dataProvider' => $dataProvider,
@@ -179,9 +177,6 @@ class RapprochementController extends Controller
         $model = $this->loadModel($id);
         $model->validated = $value;
         $model->save();
-//        Yii::app()->user->returnUrl = Yii::app()->request->urlReferrer;
-//        $this->redirect(Yii::app()->user->returnUrl);
-        // Yii::app()->end();
     }
 
     /**

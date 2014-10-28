@@ -2,16 +2,6 @@
 /* @var $this PatientController */
 /* @var $model Patient */
 
-$this->breadcrumbs = array(
-    'Patients' => array('index'),
-    'Manage',
-);
-
-$this->menu = array(
-    array('label' => 'List Patient', 'url' => array('index')),
-    array('label' => 'Create Patient', 'url' => array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -42,12 +32,12 @@ $('.search-form form').submit(function(){
     ?>
 </div><!-- search-form -->
 
-<?php
-$this->widget('zii.widgets.grid.CGridView', array(
-    'id' => 'patient-grid',
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+    'type'=>'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
-    'columns' => array(
+    /*'template'=>"{items}",*/
+    'columns'=>array(
         'id',
         'birthName',
         'useName',
@@ -55,12 +45,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => 'birthDate', 'value' => 'CommonTools::formatDate($data->birthDate)'),
         'source',
         'sex',
-        /*
-          'sex',
-         */
         array(
-            'class' => 'CButtonColumn',
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions'=>array('style'=>'width: 50px'),
         ),
     ),
-));
-?>
+)); ?>
