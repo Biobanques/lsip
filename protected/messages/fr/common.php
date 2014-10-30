@@ -1,6 +1,14 @@
 <?php
 
 return array(
-    'notAdded' => 'Le rapprochement n\'a pas pu être sauvegardé, merci de réessayer ultérieurement.'
+    /**
+     * Elements de menu
+     */
+    "managePatients" => "Gérer les patients",
+    "manageRapprochements" => "Gérer les rapprochements",
+    "manageFusions" => "Gérer les fusions",
+    "connect" => "Se connecter",
+    "disconnect" => "Se déconnecter",
+    "detectRapprochement" => "Détecter les rapprochements",
 );
 

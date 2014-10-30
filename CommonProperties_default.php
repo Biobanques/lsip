@@ -24,4 +24,5 @@ class CommonProperties
      * Be sure to end this string by a directory separator
      */
     public static $MASS_IMPORT_FOLDER = '/your/folder/here/';
+    public static $MASS_IMPORT_FILEFORMAT = '';
 }

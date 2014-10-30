@@ -185,8 +185,14 @@ class RapprochementController extends Controller
     public function actionManageFusions() {
         $model = new Rapprochement();
 
+        if (isset($_POST['Rapprochement'])) {
+            $id = $_POST['Rapprochement']['idRapprochement'];
+            $value = $_POST['Rapprochement']['value'];
+            $this->validate($id, $value);
+        }
+
         $dataProvider = $model->getFusions();
-        $this->render('indexFusions', array(
+        $this->render('indexRapprochements', array(
             'dataProvider' => $dataProvider,
         ));
     }

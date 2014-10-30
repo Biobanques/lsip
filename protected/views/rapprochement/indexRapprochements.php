@@ -12,7 +12,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Rapprochements</h1>
+<h1><?php echo Yii::t('rapprochement', 'rapprochements') ?></h1>
 <div class="panel panel-default">
     <?php
     $this->widget('zii.widgets.CListView', array(
@@ -20,8 +20,8 @@ $this->menu = array(
         'dataProvider' => $dataProvider,
         'itemView' => '_viewRapprochements',
         'sortableAttributes' => array(
-            'ratio' => 'Taux de correspondance',
-            'validated' => 'Validation'
+            'ratio' => yii::t('rapprochement', 'correspondance'),
+            'validated' => yii::t('rapprochement', 'validation')
         ),
     ));
     ?>

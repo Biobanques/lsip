@@ -12,8 +12,8 @@
      ">
     <div class="panel-heading">
         <h3 class="panel-title">Status :
-            <?php echo $data->validated == 1 && $data->validated != NULL ? 'Annulé' : (($data->validated == 0 || $data->validated == NULL) ? 'En attente' : 'Validé'); ?>
-            <br>Taux de correspondance : <?php echo $data->ratio; ?>%
+            <?php echo $data->validated == 1 && $data->validated != NULL ? Yii::t('rapprochement', 'annule') : (($data->validated == 0 || $data->validated == NULL) ? Yii::t('rapprochement', 'attente') : Yii::t('rapprochement', 'valide')); ?>
+            <br><?php echo Yii::t('rapprochement', 'correspondance') . " :  $data->ratio %" ?>
         </h3>
     </div>
     <div class="panel-body">

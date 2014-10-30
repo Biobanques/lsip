@@ -63,13 +63,13 @@ class Patient extends CActiveRecord
      */
     public function attributeLabels() {
         return array(
-            'id' => Yii::t('patient', 'id'),
-            'birthName' => Yii::t('patient', 'BirthName'),
-            'useName' => Yii::t('patient', 'Use Name'),
-            'firstName' => 'First Name',
-            'birthDate' => 'Birth Date',
-            'source' => 'Source',
-            'sex' => 'Sex',
+            'id' => Yii::t('patient', 'Id'),
+            'birthName' => Yii::t('patient', 'birthName'),
+            'useName' => Yii::t('patient', 'useName'),
+            'firstName' => Yii::t('patient', 'firstName'),
+            'birthDate' => Yii::t('patient', 'birthDate'),
+            'source' => Yii::t('patient', 'source'),
+            'sex' => Yii::t('patient', 'sex'),
         );
     }
 

@@ -130,10 +130,25 @@ class Rapprochement extends CActiveRecord
         $criteria = new CDbCriteria();
         $criteria->with = array('idP1', 'idP2');
         $criteria->addCondition('idP1.source = idP2.source');
+        $rapps = $this->findAll($criteria);
 
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
+        foreach ($rapps as $rapp) {
+            $rapp->ratio = $rapp->setRatio();
+        }
+        $result = new CArrayDataProvider($rapps, array(
+            'keyField' => 'idRapprochement',
+            'sort' => array(
+                'attributes' => array(
+                    'ratio',
+                    'validated',
+                ),
+            )
         ));
+        $result->sort->defaultOrder = 'validated ASC, ratio DESC, ';
+        return $result;
+//        return new CActiveDataProvider($this, array(
+//            'criteria' => $criteria,
+//        ));
     }
 
     public function getAllRelativePatients($baseId) {
