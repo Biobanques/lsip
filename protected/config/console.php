@@ -7,10 +7,18 @@ return array(
     'name' => 'My Console Application',
     // preloading 'log' component
     'preload' => array('log'),
+    'import' => array(
+        'application.models.*',
+        'application.components.*',
+    ),
     // application components
     'components' => array(
         'db' => array(
-            'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
+            'connectionString' => CommonProperties::$CONNECTION_STRING,
+            'emulatePrepare' => true,
+            'username' => CommonProperties::$CONNECTION_USERNAME,
+            'password' => CommonProperties::$CONNECTION_PASSWORD,
+            'charset' => 'utf8',
         ),
         // uncomment the following to use a MySQL database
         /*

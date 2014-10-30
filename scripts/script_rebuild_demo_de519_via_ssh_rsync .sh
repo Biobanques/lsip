@@ -15,4 +15,4 @@ rm -Rf ./assets/*
 
 
 echo "sync sources files"
-rsync --exclude '/CommonProperties.php' --exclude '/protected/runtime' -avz -e 'ssh'  ./ $MUSER@$MURL:$MPATH
+rsync --exclude '/CommonProperties.php' --exclude '/protected/runtime' --exclude '/data/import' -avz -e 'ssh'  ./ $MUSER@$MURL:$MPATH
