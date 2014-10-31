@@ -117,7 +117,7 @@ class Patient extends CActiveRecord
         $verified = false;
         $validated = true;
         if ($this->isNewRecord) {
-            Yii::log('passe par ici', CLogger::LEVEL_ERROR);
+
 
             while (!$verified && $validated) {
                 $id = rand(1000000, 2000000);
@@ -131,7 +131,7 @@ class Patient extends CActiveRecord
                 }
             }
         } else {
-            Yii::log('passe par la', CLogger::LEVEL_ERROR);
+
             try {
                 $verified = parent::save();
             } catch (Exception $ex) {
