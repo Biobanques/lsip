@@ -1,7 +1,5 @@
 <?php
 
-//Yii::import('application.components.UserIdentity.php');
-
 class WebServiceController extends Controller
 {
 
@@ -88,13 +86,32 @@ class WebServiceController extends Controller
      * @return array $test
 
      */
-    public function getRapprochement($sessionKey, $baseId) {
+//    public function getRapprochement($baseId) {
+//
+//        $list = Rapprochement::model()->getAllRelativePatients($baseId);
+//        return $list;
+//    }
+
+    /**
+     * @param string $sessionKey
+     * @param int $baseId
+     * @return array $result
+     * @soap
+
+     */
+    public function getRapprochedId($sessionKey, $baseId) {
         $this->authenticateBySession($sessionKey);
-        $list = Rapprochement::model()->getAllRelativePatients($baseId);
-        return $list;
+        $result = array();
+        $pats = Rapprochement::model()->getAllRelativeValidatedPatients($baseId);
+
+        foreach ($pats as $patient)
+            $result[] = $patient->id;
+
+        return isset($result) && count($result) != 0 ? $result : null;
     }
 
     /**
+
      * @param string sessionKey
      * @param WSPatient $patientBase
      * @return int id
