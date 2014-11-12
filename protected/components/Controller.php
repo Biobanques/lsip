@@ -31,6 +31,8 @@ class Controller extends CController
         } else
         if (isset($app->session['_lang'])) {
             $app->language = $app->session['_lang'];
+        } else {
+            $app->language = 'fr';
         }
     }
 

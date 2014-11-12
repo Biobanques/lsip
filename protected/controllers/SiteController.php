@@ -1,6 +1,7 @@
 <?php
 
-class SiteController extends Controller {
+class SiteController extends Controller
+{
 
     /**
      * Declares class-based actions.
@@ -87,18 +88,21 @@ class SiteController extends Controller {
         $model = new LoginForm;
 
 // if it is ajax validation request
-       /* if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }*/
+        /* if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+          echo CActiveForm::validate($model);
+          Yii::app()->end();
+          } */
 
 // collect user input data
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
 // validate user input and redirect to the previous page if valid
-            if ($model->validate()&& $model->login()) {
+            if ($model->validate() && $model->login()) {
+                //Yii::app()->user->setFlash('success', 'Well logged');
                 $this->redirect(Yii::app()->createUrl('site/index'));
-            } 
+            } else {
+                Yii::app()->user->setFlash('error', Yii::t('common', 'errorLoginAlert'));
+            }
         }
         $this->render('login', array('model' => $model));
     }

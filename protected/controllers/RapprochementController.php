@@ -172,8 +172,6 @@ class RapprochementController extends Controller
     }
 
     public function validate($id, $value) {
-
-
         $model = $this->loadModel($id);
         $model->validated = $value;
         $model->save();

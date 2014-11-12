@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
 );
 ?>
 
-<h1>Login</h1>
+<h1><?php echo Yii::t('common', 'connect'); ?></h1>
 
 <p>Please fill out the following form with your login credentials:</p>
 
@@ -23,7 +23,7 @@ $this->breadcrumbs = array(
         ),
     ));
     ?>
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note"><?php echo Yii::t('common', 'required'); ?></p>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'username'); ?>
@@ -45,7 +45,7 @@ $this->breadcrumbs = array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Login'); ?>
+        <?php echo CHtml::submitButton(Yii::t('common', 'connect')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

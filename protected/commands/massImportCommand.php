@@ -12,9 +12,9 @@ class massImportCommand extends CConsoleCommand
             echo 'saving base file...\n';
             copy($importedFile, $folderSource . "saved/$importedFile");
             echo 'Trying to parse\n';
-            if (fnmatch('*.csv', $importedFile)) {
-                $this->analyzeCsv($importedFile);
-            }
+//            if (fnmatch('*.csv', $importedFile)) {
+//                $this->analyzeCsv($importedFile);
+//            }
             if (fnmatch('*.xml', $importedFile)) {
                 $this->analyzeXml($importedFile);
             }
@@ -22,104 +22,106 @@ class massImportCommand extends CConsoleCommand
         Yii::app()->end();
     }
 
-    protected function analyzeCsv($filePath) {
-        $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
-        $folderTarget = $folderSource . 'treated/';
-        $sourceFile = fopen($folderSource . $filePath, "r");
-        $outputFile = fopen($folderTarget . $filePath, 'w');
-        $row = 1;
-        $sipArray = array();
-        while (($data = fgetcsv($sourceFile, 1000, ",")) !== FALSE) {
-            /**
-             * Construction de l'index a partir de la premiere ligne
-             */
-            if ($row == 1) {
-                $sipArray = array();
-                //print_r($data);
-                foreach ($data as $key => $item) {
+    /*
+      protected function analyzeCsv($filePath) {
+      $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+      $folderTarget = $folderSource . 'treated/';
+      $sourceFile = fopen($folderSource . $filePath, "r");
+      $outputFile = fopen($folderTarget . $filePath, 'w');
+      $row = 1;
+      $sipArray = array();
+      while (($data = fgetcsv($sourceFile, 1000, ",")) !== FALSE) {
+      /**
+     * Construction de l'index a partir de la premiere ligne
+     *
+      if ($row == 1) {
+      $sipArray = array();
+      //print_r($data);
+      foreach ($data as $key => $item) {
 
-                    if ($item == 'source') {
-                        $sipArray['source'] = $key;
-                    }
-                    if ($item == 'useName') {
-                        $sipArray['useName'] = $key;
-                        unset($data[$key]);
-                    }
-                    if ($item == 'birthName') {
-                        $sipArray['birthName'] = $key;
-                        unset($data[$key]);
-                    }
-                    if ($item == 'firstName') {
-                        $sipArray['firstName'] = $key;
-                        unset($data[$key]);
-                    }
-                    if ($item == 'sex') {
-                        $sipArray['sex'] = $key;
-                        unset($data[$key]);
-                    }
-                    if ($item == 'birthDate') {
-                        $sipArray['birthDate'] = $key;
-                        unset($data[$key]);
-                    }
-                    if ($item == 'id') {
-                        $sipArray['sourceId'] = $key;
-                        unset($data[$key]);
-                    }
-                }
+      if ($item == 'source') {
+      $sipArray['source'] = $key;
+      }
+      if ($item == 'useName') {
+      $sipArray['useName'] = $key;
+      unset($data[$key]);
+      }
+      if ($item == 'birthName') {
+      $sipArray['birthName'] = $key;
+      unset($data[$key]);
+      }
+      if ($item == 'firstName') {
+      $sipArray['firstName'] = $key;
+      unset($data[$key]);
+      }
+      if ($item == 'sex') {
+      $sipArray['sex'] = $key;
+      unset($data[$key]);
+      }
+      if ($item == 'birthDate') {
+      $sipArray['birthDate'] = $key;
+      unset($data[$key]);
+      }
+      if ($item == 'id') {
+      $sipArray['sourceId'] = $key;
+      unset($data[$key]);
+      }
+      }
 
-                if (count($sipArray) != 7) {
+      if (count($sipArray) != 7) {
 
-                    $exp = new Exception('A SIP item is missing in the file ' . $filePath);
-                    Yii::log($exp->getMessage(), CLogger::LEVEL_ERROR);
-                } else
-                    $data[] = 'idSip';
-            } else {
-                $needs = true;
-                foreach ($sipArray as $keyField) {
-                    if ($keyField != 'sourceId' && ($data[$keyField] == null || $data[$keyField] == ''))
-                        $needs = false;
-                }
-                if ($needs) {
-                    $patient = new Patient;
-                    $patient->source = $data[$sipArray['source']];
-                    $patient->birthName = $data[$sipArray['birthName']];
-                    $patient->useName = $data[$sipArray['useName']];
-                    $patient->firstName = $data[$sipArray['firstName']];
-                    $patient->birthDate = CommonTools::formatDate($data[$sipArray['birthDate']], 'mysql');
-                    $patient->sex = $data[$sipArray['sex']];
-                    isset($sipArray['sourceId']) ? $patient->sourceId = $data[$sipArray['sourceId']] : null;
-//                    if (substr($filePath, 0, 3) === 'adn')
-//                        $patient->source = 2;
-//                    elseif (substr($filePath, 0, 7) === 'cerveau')
-//                        $patient->source = 1;
+      $exp = new Exception('A SIP item is missing in the file ' . $filePath);
+      Yii::log($exp->getMessage(), CLogger::LEVEL_ERROR);
+      } else
+      $data[] = 'idSip';
+      } else {
+      $needs = true;
+      foreach ($sipArray as $keyField) {
+      if ($keyField != 'sourceId' && ($data[$keyField] == null || $data[$keyField] == ''))
+      $needs = false;
+      }
+      if ($needs) {
+      $patient = new Patient;
+      $patient->source = $data[$sipArray['source']];
+      $patient->birthName = $data[$sipArray['birthName']];
+      $patient->useName = $data[$sipArray['useName']];
+      $patient->firstName = $data[$sipArray['firstName']];
+      $patient->birthDate = CommonTools::formatDate($data[$sipArray['birthDate']], 'mysql');
+      $patient->sex = $data[$sipArray['sex']];
+      isset($sipArray['sourceId']) ? $patient->sourceId = $data[$sipArray['sourceId']] : null;
+      //                    if (substr($filePath, 0, 3) === 'adn')
+      //                        $patient->source = 2;
+      //                    elseif (substr($filePath, 0, 7) === 'cerveau')
+      //                        $patient->source = 1;
 
-                    if (!$patient->save()) {
-                        $exp = new Exception('Save patient error');
-                        Yii::log($exp->getMessage(), CLogger::LEVEL_ERROR);
-                    } else {
-                        unset($data[$sipArray['birthName']]);
-                        unset($data[$sipArray['useName']]);
-                        unset($data[$sipArray['firstName']]);
-                        unset($data[$sipArray['birthDate']]);
-                        unset($data[$sipArray['sex']]);
-                        if (isset($sipArray['sourceId']))
-                            unset($data[$sipArray['sourceId']]);
+      if (!$patient->save()) {
+      $exp = new Exception('Save patient error');
+      Yii::log($exp->getMessage(), CLogger::LEVEL_ERROR);
+      } else {
+      unset($data[$sipArray['birthName']]);
+      unset($data[$sipArray['useName']]);
+      unset($data[$sipArray['firstName']]);
+      unset($data[$sipArray['birthDate']]);
+      unset($data[$sipArray['sex']]);
+      if (isset($sipArray['sourceId']))
+      unset($data[$sipArray['sourceId']]);
 
-                        $data[] = $patient->id;
-                    }
-                }else {
-                    $exp = new Exception('Missing patient item');
-                    Yii::log($exp->getMessage(), CLogger::LEVEL_ERROR);
-                }
-            }
-            $row++;
+      $data[] = $patient->id;
+      }
+      }else {
+      $exp = new Exception('Missing patient item');
+      Yii::log($exp->getMessage(), CLogger::LEVEL_ERROR);
+      }
+      }
+      $row++;
 
-            fputcsv($outputFile, $data);
-        }
-        fclose($sourceFile);
-        unlink($filePath);
-        fclose($outputFile);
-    }
+      fputcsv($outputFile, $data);
+      }
+      fclose($sourceFile);
+      unlink($filePath);
+      fclose($outputFile);
+      }
+     */
 
     protected function analyzeXml($filePath) {
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
@@ -153,10 +155,11 @@ class massImportCommand extends CConsoleCommand
                     }
                 }
                 if ($patient->save()) {
+
                     $outputChild->addChild('id', $patient->id);
                     $this->sxml_append($outputXml, $outputChild);
                 } else
-                    Yii::log('save pb', CLogger::LEVEL_ERROR);
+                    Yii::log('Patient save error', CLogger::LEVEL_ERROR);
             } catch (Exception $ex) {
                 Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
             }

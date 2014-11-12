@@ -168,6 +168,29 @@ class Rapprochement extends CActiveRecord
         return $result;
     }
 
+    public function getAllRelativeValidatedPatients($baseId) {
+        try {
+            $list1 = $this->findAllByAttributes(array('idPat1' => $baseId, 'validated' => '2'));
+            $result = array();
+
+            foreach ($list1 as $r1) {
+                if ($r1->idP1->source != $r1->idP2->source)
+                    $result[] = WSPatient::model()->findByPk($r1->idPat2);
+            }
+
+            $list2 = $this->findAllByAttributes(array('idPat2' => $baseId, 'validated' => '2'));
+
+            foreach ($list2 as $r2) {
+                if ($r2->idP1->source != $r2->idP2->source)
+                    $result[] = WSPatient::model()->findByPk($r2->idPat1);
+            }
+
+            return isset($result) && $result != null ? $result : array();
+        } catch (Exception $e) {
+            Yii::log($e->getMessage());
+        }
+    }
+
     public function setRatio() {
         $pat1 = $this->idP1;
         $pat2 = $this->idP2;
