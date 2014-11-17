@@ -66,6 +66,7 @@ CREATE TABLE `Patient` (
   `birthDate` datetime NOT NULL,
   `source` int(11) NOT NULL,
   `sex` varchar(45) NOT NULL,
+`birthPlace` varchar(45) default NULL,
   `sourceId` varchar(45) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_Patient_Sources1_idx` (`source`),

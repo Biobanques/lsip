@@ -8,4 +8,5 @@ return array(
     "birthDate" => "Date de naissance",
     "source" => "Source",
     "sex" => "Sexe",
+    "birthPlace" => "Lieu de naissance",
 );

@@ -20,6 +20,7 @@ class Patient extends CActiveRecord
     public $firstName;
     public $birthDate;
     public $source;
+    public $birthPlace;
     public $sex;
 
     /**
@@ -38,12 +39,13 @@ class Patient extends CActiveRecord
         return array(
             array('birthName, useName, firstName, birthDate, source, sex', 'required'),
             array('id', 'required', 'on' => 'save'),
-            array('birthName, firstName, source, sex', 'length', 'max' => 255),
-            array('sourceId', 'length', 'allowEmpty' => true),
+            array('birthName, firstName, source, birthPlace', 'length', 'max' => 255),
+            array('sex', 'length', 'max' => 1),
+            array('sourceId,birthPlace', 'length', 'allowEmpty' => true),
             array('birthDate', 'date', 'format' => CommonTools::getValidDateFormats()),
 //            // The following rule is used by search().
 //            // @todo Please remove those attributes that should not be searched.
-            array('id,  useName, firstName, birthDate, source,sourceId, sex', 'safe', 'on' => 'search'),
+            array('id,  useName, firstName, birthDate, source,sourceId, sex,birthPlace', 'safe', 'on' => 'search'),
         );
     }
 
@@ -69,6 +71,7 @@ class Patient extends CActiveRecord
             'firstName' => Yii::t('patient', 'firstName'),
             'birthDate' => Yii::t('patient', 'birthDate'),
             'source' => Yii::t('patient', 'source'),
+            'birthPlace' => Yii::t('patient', 'birthPlace'),
             'sex' => Yii::t('patient', 'sex'),
         );
     }

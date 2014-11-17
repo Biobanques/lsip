@@ -20,9 +20,8 @@ class CommonProperties
     public static $ADMIN_EMAIL = 'email@admin.com';
     /**
      *
-     * import csv folder.
+     * import folder.
      * Be sure to end this string by a directory separator
      */
     public static $MASS_IMPORT_FOLDER = '/your/folder/here/';
-    public static $MASS_IMPORT_FILEFORMAT = '';
 }
