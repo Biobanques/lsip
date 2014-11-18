@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- DROP TABLE IF EXISTS `users`;
+ DROP TABLE IF EXISTS `users`;
 -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
 -- /*!40101 SET character_set_client = utf8 */;
  CREATE TABLE `users` (
@@ -27,14 +27,17 @@
    `login` varchar(45) NOT NULL,
    `password` varchar(45) NOT NULL,
    PRIMARY KEY (`id`)
- ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+ ) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=latin1;
+
+-- init first user
+INSERT INTO `users` ( profil, login, password) VALUES (1,'admin','lsip');
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 --
 -- Table structure for table `Sources`
 --
 
--- DROP TABLE IF EXISTS `Sources`;
+ DROP TABLE IF EXISTS `Sources`;
 -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
 -- /*!40101 SET character_set_client = utf8 */;
  CREATE TABLE `Sources` (

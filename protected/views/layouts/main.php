@@ -32,7 +32,9 @@
                                     array('label' => Yii::t('common', 'managePatients'), 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isAdmin()),
                                     array('label' => Yii::t('common', 'manageRapprochements'), 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
                                     array('label' => Yii::t('common', 'manageFusions'), 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin()),
-                                    array('label' => Yii::t('common', 'detectRapprochement'), 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
+                                    array('label' => Yii::t('common', 'detectRapprochement'), 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin()),
+                                    array('label' => Yii::t('common', 'ManageSources'), 'url' => array('/sources/admin'), 'visible' => Yii::app()->user->isAdmin()),
+                                    array('label' => Yii::t('common', 'ManageUser'), 'url' => array('/user/admin'), 'visible' => Yii::app()->user->isAdmin()),
                                     array('label' => Yii::t('common', 'connect'), 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                                     array('label' => Yii::t('common', 'disconnect') . '(' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
                                 ),
