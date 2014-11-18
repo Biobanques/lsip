@@ -27,10 +27,9 @@
    `login` varchar(45) NOT NULL,
    `password` varchar(45) NOT NULL,
    PRIMARY KEY (`id`)
- ) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=latin1;
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
--- init first user
-INSERT INTO `users` ( profil, login, password) VALUES (1,'admin','lsip');
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 --
@@ -51,7 +50,7 @@ INSERT INTO `users` ( profil, login, password) VALUES (1,'admin','lsip');
    KEY `fk_Sources_2_idx` (`webapp`),
    CONSTRAINT `fk_Sources_1` FOREIGN KEY (`admin`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
    CONSTRAINT `fk_Sources_2` FOREIGN KEY (`webapp`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
- ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,9 +94,10 @@ CREATE TABLE `Rapprochement` (
   KEY `fk_Rapprochement_Patient2_idx` (`idPat2`),
   CONSTRAINT `fk_Rapprochement_Patient1` FOREIGN KEY (`idPat1`) REFERENCES `Patient` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_Rapprochement_Patient2` FOREIGN KEY (`idPat2`) REFERENCES `Patient` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+DROP PROCEDURE IF EXISTS `detect_rapprochement2`;
 
 DELIMITER $$
 CREATE PROCEDURE `detect_rapprochement2`(
@@ -247,3 +247,6 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 SET FOREIGN_KEY_CHECKS=1;
 -- Dump completed on 2014-10-15 17:19:49
+
+-- init first user
+INSERT INTO `users` ( profil, login, password) VALUES (1,'admin','lsip');
