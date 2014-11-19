@@ -58,7 +58,7 @@ class SourcesController extends Controller
         if (isset($_POST['Sources'])) {
             $model->attributes = $_POST['Sources'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin', 'id' => $model->id));
         }
 
         $this->render('create', array(
