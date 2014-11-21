@@ -126,10 +126,12 @@ class Rapprochement extends CActiveRecord
 //        ));
     }
 
-    public function getFusions() {
+    public function getFusions($biobankId = null) {
         $criteria = new CDbCriteria();
         $criteria->with = array('idP1', 'idP2');
         $criteria->addCondition('idP1.source = idP2.source');
+        if ($biobankId != null)
+            $criteria->addCondition("idP1.source=$biobankId");
         $rapps = $this->findAll($criteria);
 
         foreach ($rapps as $rapp) {

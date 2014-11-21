@@ -16,7 +16,7 @@ class massImportCommand extends CConsoleCommand
 //                $this->analyzeCsv($importedFile);
 //            }
             if (fnmatch('*.xml', $importedFile)) {
-                $this->analyzeXml($importedFile);
+                CommonTools::analyzeXml($importedFile);
             }
         }
         Yii::app()->end();
@@ -123,51 +123,6 @@ class massImportCommand extends CConsoleCommand
       }
      */
 
-    protected function analyzeXml($filePath) {
-        $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
-        $folderTarget = $folderSource . 'treated/';
-        $file = simplexml_load_file($filePath);
-        $outputXml = new SimpleXMLElement("<?xml version=\"1.0\"?><" . $file->getName() . "></" . $file->getName() . ">");
-        foreach ($file->children() as $child) {
-            try {
-                $patient = new Patient;
-                $outputChild = new SimpleXMLElement("<" . $child->getName() . "/>");
-//            $outputChild = $outputXml->addChild($child->getName());
-                foreach ($child->children() as $att) {
-
-                    if ($att->getName() == 'source') {
-                        $patient->source = "$att";
-                        $outputChild->addChild($att->getName(), $att);
-                    } elseif ($att->getName() == 'useName') {
-                        $patient->useName = "$att";
-                    } elseif ($att->getName() == 'birthName') {
-                        $patient->birthName = "$att";
-                    } elseif ($att->getName() == 'firstName') {
-                        $patient->firstName = "$att";
-                    } elseif ($att->getName() == 'sex') {
-                        $patient->sex = "$att";
-                    } elseif ($att->getName() == 'birthDate') {
-                        $patient->birthDate = CommonTools::formatDate("$att", "mysql");
-                    } elseif ($att->getName() == 'id') {
-                        $patient->sourceId = "$att";
-                    } else {
-                        $outputChild->addChild($att->getName(), $att);
-                    }
-                }
-                if ($patient->save()) {
-
-                    $outputChild->addChild('id', $patient->id);
-                    $this->sxml_append($outputXml, $outputChild);
-                } else
-                    Yii::log('Patient save error', CLogger::LEVEL_ERROR);
-            } catch (Exception $ex) {
-                Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
-            }
-        }
-        $outputXml->asXML($folderTarget . $filePath);
-        unlink($filePath);
-    }
-
     /**
      * tool remove after use
      * @param type $filePath
@@ -198,12 +153,6 @@ class massImportCommand extends CConsoleCommand
         }
 
         $xml->asXML($folderTarget . substr($filePath, 0, -3) . 'xml');
-    }
-
-    public function sxml_append(SimpleXMLElement $to, SimpleXMLElement $from) {
-        $toDom = dom_import_simplexml($to);
-        $fromDom = dom_import_simplexml($from);
-        $toDom->appendChild($toDom->ownerDocument->importNode($fromDom, true));
     }
 
 }

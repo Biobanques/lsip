@@ -26,6 +26,16 @@
 		<?php echo $form->textField($model,'passphrase',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'admin'); ?>
+		<?php echo $form->textField($model,'admin'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'webapp'); ?>
+		<?php echo $form->textField($model,'webapp'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

@@ -65,7 +65,8 @@ $this->endWidget();
 </div><!-- search-form -->
 
 <?php
-$this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('bootstrap.widgets.TbGridView', array(
+    'type' => 'striped bordered condensed',
     'id' => 'user-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
@@ -77,7 +78,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'login',
         'password',
         array(
-            'class' => 'CButtonColumn',
+            'class' => 'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions' => array('style' => 'width: 50px'),
             'template' => '{update}{delete}',
         ),
     ),

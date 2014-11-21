@@ -32,12 +32,13 @@ $('.search-form form').submit(function(){
     ?>
 </div><!-- search-form -->
 
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
-    'type'=>'striped bordered condensed',
+<?php
+$this->widget('bootstrap.widgets.TbGridView', array(
+    'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
-    /*'template'=>"{items}",*/
-    'columns'=>array(
+    /* 'template'=>"{items}", */
+    'columns' => array(
         'id',
         'birthName',
         'useName',
@@ -46,8 +47,10 @@ $('.search-form form').submit(function(){
         'source',
         'sex',
         array(
-            'class'=>'bootstrap.widgets.TbButtonColumn',
-            'htmlOptions'=>array('style'=>'width: 50px'),
+            'class' => 'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions' => array('style' => 'width: 50px'),
+            'template' => '{update}{delete}',
         ),
     ),
-)); ?>
+));
+?>

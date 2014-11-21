@@ -24,5 +24,7 @@ $this->menu=array(
 		'id',
 		'name',
 		'passphrase',
+		'admin',
+		'webapp',
 	),
 )); ?>

@@ -7,6 +7,8 @@ return array(
     "managePatients" => "Manage patients",
     "manageRapprochements" => "Manage rapprochements",
     "manageFusions" => "Manage fusions",
+    "manageUsers" => "Manage users",
+    "manageSources" => "Manage sources",
     "connect" => "Connect",
     "disconnect" => "Disconnect",
     "detectRapprochement" => "Find rapprochements",
@@ -14,6 +16,8 @@ return array(
     "username" => "Username",
     "password" => "Password",
     "rememberMe" => "Remember me",
-    "required" => "Fields with <span class=\"required\">*</span> are required."
+    "required" => "Fields with <span class=\"required\">*</span> are required.",
+    "massImport" => "Import XML",
+    'longTimeMessage' => "This may take several minutes. Continue ?",
 );
 

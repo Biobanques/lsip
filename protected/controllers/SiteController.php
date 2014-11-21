@@ -28,7 +28,7 @@ class SiteController extends Controller
                 'users' => array('*'),
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('detectRapprochement', 'changeId', 'changeBD'),
+                'actions' => array('detectRapprochement', 'changeId', 'changeBD', 'massImport'),
                 'expression' => '$user->isAdmin()'
             ),
             array('deny', // deny all users
@@ -121,6 +121,27 @@ class SiteController extends Controller
         foreach ($patients as $patientBase) {
             CommonTools::detect($patientBase);
         }
+        $this->redirect(Yii::app()->createUrl('rapprochement/manageRapprochements'));
+    }
+
+    public function actionMassImport() {
+        include 'CommonTools.php';
+        $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        $current = getcwd();
+        chdir($folderSource);
+        $files = array_filter(glob('*'), 'is_file');
+
+        foreach ($files as $importedFile) {
+
+            copy($importedFile, $folderSource . "saved/$importedFile");
+
+
+            if (fnmatch('*.xml', $importedFile)) {
+
+                CommonTools::analyzeXml($importedFile);
+            }
+        }
+        // $this->redirect(Yii::app()->createUrl('site/detectRapprochement'));
         $this->redirect(Yii::app()->createUrl('rapprochement/manageRapprochements'));
     }
 

@@ -189,7 +189,12 @@ class RapprochementController extends Controller
             $this->validate($id, $value);
         }
 
-        $dataProvider = $model->getFusions();
+        if (Yii::app()->user->isBiobankAdmin()) {
+
+            $biobankId = Sources::model()->findByAttributes(array('admin' => Yii::app()->user->id))->id;
+            $dataProvider = $model->getFusions($biobankId);
+        } else
+            $dataProvider = $model->getFusions();
         $this->render('indexRapprochements', array(
             'dataProvider' => $dataProvider,
         ));

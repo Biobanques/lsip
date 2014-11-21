@@ -17,5 +17,13 @@
 	<?php echo CHtml::encode($data->passphrase); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('admin')); ?>:</b>
+	<?php echo CHtml::encode($data->admin); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('webapp')); ?>:</b>
+	<?php echo CHtml::encode($data->webapp); ?>
+	<br />
+
 
 </div>
