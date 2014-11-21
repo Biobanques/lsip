@@ -88,6 +88,7 @@
                         <div class="clear"></div>
 
                         <div id="footer">
+                            Lsip v. 1.0<br/>
                             Copyright &copy; <?php echo date('Y'); ?> by Biobanques.<br/>
                             All Rights Reserved.<br/>
                             <?php echo Yii::powered(); ?>
