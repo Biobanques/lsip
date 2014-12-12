@@ -6,6 +6,9 @@ Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap')
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
+    'aliases' => array(
+        'bootstrap' => realpath(__DIR__ . '/../extensions/bootstrap'), // change this if necessary
+    ),
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'CBSD - Serveur d\'Identité Patient',
     'defaultController' => 'site/login',
@@ -16,6 +19,13 @@ return array(
         'application.models.*',
         'application.models.wsModels.*',
         'application.components.*',
+        'ext.*',
+        'ext.bootstrap.*',
+        'ext.bootstrap.components.*',
+        'ext.bootstrap.widgets.*',
+        'ext.bootstrap.helpers.TbHtml',
+        'ext.bootstrap.helpers.TbArray',
+        'ext.bootstrap.behaviors.*',
     ),
     'modules' => array(
 // uncomment the following to enable the Gii tool
@@ -25,6 +35,7 @@ return array(
             'password' => 'admin',
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters' => array('127.0.0.1', '::1'),
+            'generatorPaths' => array('bootstrap.gii'),
         ),
     ),
     // application components
@@ -49,7 +60,7 @@ return array(
             'errorAction' => 'site/error',
         ),
         'bootstrap' => array(
-            'class' => 'bootstrap.components.Bootstrap',
+            'class' => 'bootstrap.components.TbApi',
         ),
         'log' => array(
             'class' => 'CLogRouter',
