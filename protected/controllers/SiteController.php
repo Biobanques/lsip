@@ -24,8 +24,12 @@ class SiteController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index'),
                 'users' => array('*'),
+            ),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('index', 'view', 'xmlImport'),
+                'users' => array('$user->isBiobankAdmin()'),
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('detectRapprochement', 'changeId', 'changeBD', 'massImport'),
@@ -124,10 +128,40 @@ class SiteController extends Controller
         $this->redirect(Yii::app()->createUrl('rapprochement/manageRapprochements'));
     }
 
+    public function actionXmlImport() {
+        $count = 0;
+
+        $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
+            foreach ($_FILES['fileToImport']['name'] as $f => $name) {
+                if ($_FILES['fileToImport']['error'][$f] == 4) {
+                    continue; // Skip file if any error found
+                }
+                if ($_FILES['fileToImport']['error'][$f] == 0) {
+
+                    // No error found! Move uploaded fileToImport
+                    if (move_uploaded_file($_FILES["fileToImport"]["tmp_name"][$f], $folderSource . $name)) {
+
+                        $count++; // Number of successfully uploaded file
+                    }
+                }
+            }
+            $this->doImport();
+        }
+        $this->render('import');
+    }
+
     public function actionMassImport() {
+
+        $this->doImport();
+        $this->redirect(Yii::app()->createUrl('rapprochement/manageRapprochements'));
+    }
+
+    protected function doImport() {
         include 'CommonTools.php';
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
-        $current = getcwd();
+
+
         chdir($folderSource);
         $files = array_filter(glob('*'), 'is_file');
 
@@ -138,11 +172,9 @@ class SiteController extends Controller
 
             if (fnmatch('*.xml', $importedFile)) {
 
-                CommonTools::analyzeXml($importedFile);
+                CommonTools::analyzeAndRecreateXml($importedFile);
             }
         }
-        // $this->redirect(Yii::app()->createUrl('site/detectRapprochement'));
-        $this->redirect(Yii::app()->createUrl('rapprochement/manageRapprochements'));
     }
 
     public function actionChangeId() {

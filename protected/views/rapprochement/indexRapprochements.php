@@ -12,7 +12,7 @@ $this->menu = array(
 );
 ?>
 
-<h1><?php echo Yii::t('rapprochement', 'rapprochements') ?></h1>
+<h1><?php echo Yii::t('common', "manage$type") ?></h1>
 <div class="panel panel-default">
     <?php
     $this->widget('zii.widgets.CListView', array(

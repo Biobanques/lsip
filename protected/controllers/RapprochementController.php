@@ -167,7 +167,7 @@ class RapprochementController extends Controller
         $dataProvider = $model->getRapprochements();
 
         $this->render('indexRapprochements', array(
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider, 'type' => 'Rapprochements'
         ));
     }
 
@@ -196,7 +196,7 @@ class RapprochementController extends Controller
         } else
             $dataProvider = $model->getFusions();
         $this->render('indexRapprochements', array(
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider, 'type' => 'Fusions'
         ));
     }
 

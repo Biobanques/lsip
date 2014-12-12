@@ -14,5 +14,7 @@ echo "delete local cache files"
 rm -Rf ./assets/*
 
 
+
+
 echo "sync sources files"
 rsync --exclude '/CommonProperties.php' --exclude '/protected/runtime' --exclude '/data/import' -avz -e 'ssh'  ./ $MUSER@$MURL:$MPATH

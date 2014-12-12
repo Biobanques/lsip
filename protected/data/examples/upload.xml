@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<samples>
+    <source>2</source>
+    <sample>
+        <patient>
+            <birthName>toto</birthName>
+            <firstName>tutu</firstName>
+            <useName/>
+            <birthDate>01/03/1981</birthDate> 
+            <sex>M</sex>
+        </patient>
+        <item1>t1</item1>
+        <item2>t2</item2>
+        <item3>t3</item3>
+        <item4>t4</item4>
+        <item5>t5</item5>
+        
+        <item6>t6</item6>
+        <item7>t7</item7>
+        <item8>t8</item8>
+        
+        <item9>t9</item9>
+        
+        <item10>t10</item10>
+        <item11/>
+        <item12>t12</item12>
+       
+        <item13>t13</item13>
+        <item14>t14</item14>
+        <item15>t15</item15>
+    </sample>
+</samples>

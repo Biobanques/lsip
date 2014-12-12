@@ -37,7 +37,7 @@ class Patient extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('birthName, useName, firstName, birthDate, source, sex', 'required'),
+            array('birthName, firstName, birthDate, source, sex', 'required'),
             array('id', 'required', 'on' => 'save'),
             array('birthName, firstName, source, birthPlace', 'length', 'max' => 255),
             array('sex', 'length', 'max' => 1),

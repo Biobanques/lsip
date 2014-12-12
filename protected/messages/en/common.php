@@ -19,5 +19,7 @@ return array(
     "required" => "Fields with <span class=\"required\">*</span> are required.",
     "massImport" => "Import XML",
     'longTimeMessage' => "This may take several minutes. Continue ?",
+    "xmlUpload" => "Upload xml files",
+    "thisFile" => "this one"
 );
 

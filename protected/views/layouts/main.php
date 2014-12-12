@@ -20,9 +20,9 @@
                 array(
                     'class' => 'bootstrap.widgets.TbNav',
                     'items' => array(
-                        array('label' => Yii::t('common', 'managePatients'), 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isAdmin()),
+                        array('label' => Yii::t('common', 'managePatients'), 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
                         array('label' => Yii::t('common', 'manageRapprochements'), 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'xmlUpload'), 'url' => array('/site/xmlImport'), 'visible' => Yii::app()->user->isBiobankAdmin()),
+                        array('label' => Yii::t('common', 'xmlUpload'), 'url' => array('/site/xmlImport'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
                         array('label' => Yii::t('common', 'manageFusions'), 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
                         array('label' => Yii::t('common', 'detectRapprochement'), 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin(), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
                         array('label' => Yii::t('common', 'massImport'), 'url' => array('/site/massImport'), 'visible' => Yii::app()->user->isAdmin(), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),

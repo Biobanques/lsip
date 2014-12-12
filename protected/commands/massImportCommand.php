@@ -16,7 +16,7 @@ class massImportCommand extends CConsoleCommand
 //                $this->analyzeCsv($importedFile);
 //            }
             if (fnmatch('*.xml', $importedFile)) {
-                CommonTools::analyzeXml($importedFile);
+                CommonTools::analyzeAndRecreateXml($importedFile);
             }
         }
         Yii::app()->end();

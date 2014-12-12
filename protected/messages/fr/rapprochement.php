@@ -7,5 +7,6 @@ return array(
     "annule" => "Annulé",
     "valide" => "Validé",
     "attente" => "En attente",
+    "fusions" => "Fusions"
 );
 

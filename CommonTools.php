@@ -29,7 +29,7 @@ class CommonTools
         $params .= "'$patientBase->sex',";
         $params .= "'$patientBase->sourceId'";
 
-        //echo $params;
+//echo $params;
 //            $params = rtrim($params, ",");
         $command = Yii::app()->db->createCommand("call detect_rapprochement2($params)");
         $command->execute();
@@ -59,45 +59,29 @@ class CommonTools
         );
     }
 
-    public static function analyzeXml($filePath) {
+    public static function analyzeAndRecreateXml($filePath) {
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
         $folderTarget = $folderSource . 'treated/';
         $file = simplexml_load_file($filePath);
         $outputXml = new SimpleXMLElement("<?xml version=\"1.0\"?><" . $file->getName() . "></" . $file->getName() . ">");
         foreach ($file->children() as $child) {
-            try {
-                $patient = new Patient;
-                $outputChild = new SimpleXMLElement("<" . $child->getName() . "/>");
-//            $outputChild = $outputXml->addChild($child->getName());
+            $outputChild = new SimpleXMLElement("<" . $child->getName() . "/>");
+            if ($child->getName() == 'source') {
+                $source = "$child";
+                $outputXml->addChild("source", $source);
+            } elseif ($child->getName() == 'sample') {
                 foreach ($child->children() as $att) {
-
-                    if ($att->getName() == 'source') {
-                        $patient->source = "$att";
-                        $outputChild->addChild($att->getName(), $att);
-                    } elseif ($att->getName() == 'useName') {
-                        $patient->useName = "$att";
-                    } elseif ($att->getName() == 'birthName') {
-                        $patient->birthName = "$att";
-                    } elseif ($att->getName() == 'firstName') {
-                        $patient->firstName = "$att";
-                    } elseif ($att->getName() == 'sex') {
-                        $patient->sex = "$att";
-                    } elseif ($att->getName() == 'birthDate') {
-                        $patient->birthDate = CommonTools::formatDate("$att", "mysql");
-                    } elseif ($att->getName() == 'id') {
-                        $patient->sourceId = "$att";
+                    if ($att->getName() == "patient") {
+                        $patient = CommonTools::setPatientFromXml($att);
+                        $patient->source = $source;
                     } else {
                         $outputChild->addChild($att->getName(), $att);
                     }
                 }
                 if ($patient->save()) {
-
-                    $outputChild->addChild('id', $patient->id);
+                    $outputChild->addChild('sipId', $patient->id);
                     CommonTools::sxml_append($outputXml, $outputChild);
-                } else
-                    Yii::log('Patient save error', CLogger::LEVEL_ERROR);
-            } catch (Exception $ex) {
-                Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
+                }
             }
         }
         $outputXml->asXML($folderTarget . $filePath);
@@ -108,6 +92,26 @@ class CommonTools
         $toDom = dom_import_simplexml($to);
         $fromDom = dom_import_simplexml($from);
         $toDom->appendChild($toDom->ownerDocument->importNode($fromDom, true));
+    }
+
+    public static function setPatientFromXml($xml) {
+        $patient = new Patient();
+        foreach ($xml->children() as $patientAttribute) {
+            if ($patientAttribute->getName() == 'useName') {
+                $patient->useName = "$patientAttribute";
+            } elseif ($patientAttribute->getName() == 'birthName') {
+                $patient->birthName = "$patientAttribute";
+            } elseif ($patientAttribute->getName() == 'firstName') {
+                $patient->firstName = "$patientAttribute";
+            } elseif ($patientAttribute->getName() == 'sex') {
+                $patient->sex = "$patientAttribute";
+            } elseif ($patientAttribute->getName() == 'birthDate') {
+                $patient->birthDate = CommonTools::formatDate("$patientAttribute", "mysql");
+            } elseif ($patientAttribute->getName() == 'id') {
+                $patient->sourceId = "$patientAttribute";
+            }
+        }
+        return $patient;
     }
 
 }
