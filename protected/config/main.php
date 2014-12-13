@@ -21,6 +21,7 @@ return array(
         'application.components.*',
         'ext.*',
         'ext.bootstrap.*',
+        'ext.bootstrap.form.*',
         'ext.bootstrap.components.*',
         'ext.bootstrap.widgets.*',
         'ext.bootstrap.helpers.TbHtml',

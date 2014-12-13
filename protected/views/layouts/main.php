@@ -21,9 +21,9 @@
                     'class' => 'bootstrap.widgets.TbNav',
                     'items' => array(
                         array('label' => Yii::t('common', 'managePatients'), 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'manageRapprochements'), 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'xmlUpload'), 'url' => array('/site/xmlImport'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
+                        array('label' => Yii::t('common', 'manageRapprochements'), 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
                         array('label' => Yii::t('common', 'manageFusions'), 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
+                        array('label' => Yii::t('common', 'xmlUpload'), 'url' => array('/site/xmlImport'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
                         array('label' => Yii::t('common', 'detectRapprochement'), 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin(), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
                         array('label' => Yii::t('common', 'massImport'), 'url' => array('/site/massImport'), 'visible' => Yii::app()->user->isAdmin(), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
                         array('label' => Yii::t('common', 'manageSources'), 'url' => array('/sources/admin'), 'visible' => Yii::app()->user->isAdmin()),
@@ -46,39 +46,39 @@
 
 
         <span>
-            <?php
-            /**
-             * Affichage des liens de traduction en gardant le couple controlleur/action et les parametres d'origine.
-             */
-            $controler = Yii::app()->getController()->getId();
-            $action = Yii::app()->getController()->getAction()->getId();
-            echo CHtml::link(
-                    CHtml::image(Yii::app()->request->baseUrl . '/images/fr.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "fr"))
-                    )
+<?php
+/**
+ * Affichage des liens de traduction en gardant le couple controlleur/action et les parametres d'origine.
+ */
+$controler = Yii::app()->getController()->getId();
+$action = Yii::app()->getController()->getAction()->getId();
+echo CHtml::link(
+        CHtml::image(Yii::app()->request->baseUrl . '/images/fr.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "fr"))
+        )
 //                        ,                      $htmlOptions
-            );
-            echo CHtml::link(
-                    CHtml::image(Yii::app()->request->baseUrl . '/images/gb.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "en")))
-                    , array('style' => "padding-left: 10px;")
-            );
-            ?>
+);
+echo CHtml::link(
+        CHtml::image(Yii::app()->request->baseUrl . '/images/gb.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "en")))
+        , array('style' => "padding-left: 10px;")
+);
+?>
         </span>
-        <?php
-        $this->widget('bootstrap.widgets.TbAlert', array(
-            'block' => true,
-            'fade' => true,
-            'closeText' => '&times;', // false equals no close link
-            'events' => array(),
-            'htmlOptions' => array(),
-            'alerts' => array(// configurations per alert type
-                // success, info, warning, error or danger
-                'success' => array('closeText' => '&times;'),
-                'info', // you don't need to specify full config
-                'warning' => array('block' => false, 'closeText' => false),
-                'error' => array('block' => false)
-            ),
-        ));
-        ?>
+            <?php
+            $this->widget('bootstrap.widgets.TbAlert', array(
+                'block' => true,
+                'fade' => true,
+                'closeText' => '&times;', // false equals no close link
+                'events' => array(),
+                'htmlOptions' => array(),
+                'alerts' => array(// configurations per alert type
+                    // success, info, warning, error or danger
+                    'success' => array('closeText' => '&times;'),
+                    'info', // you don't need to specify full config
+                    'warning' => array('block' => false, 'closeText' => false),
+                    'error' => array('block' => false)
+                ),
+            ));
+            ?>
 
         <?php echo $content; ?>
 
@@ -88,7 +88,7 @@
             Lsip v. 1.0<br/>
             Copyright &copy; <?php echo date('Y'); ?> by Biobanques.<br/>
             All Rights Reserved.<br/>
-            <?php echo Yii::powered(); ?>
+        <?php echo Yii::powered(); ?>
         </div><!-- footer -->
 
         </div><!-- page -->

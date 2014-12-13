@@ -20,6 +20,7 @@ return array(
     "massImport" => "Import XML",
     'longTimeMessage' => "This may take several minutes. Continue ?",
     "xmlUpload" => "Upload xml files",
-    "thisFile" => "this one"
+    "thisFile" => "this one",
+    'NotKnown' => "Not available",
 );
 

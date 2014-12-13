@@ -36,7 +36,7 @@ $('.search-form form').submit(function(){
 $this->widget('bootstrap.widgets.TbGridView', array(
     'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
-    'filter' => $model,
+    //  'filter' => $model,
     /* 'template'=>"{items}", */
     'columns' => array(
         'id',
@@ -44,7 +44,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'useName',
         'firstName',
         array('name' => 'birthDate', 'value' => 'CommonTools::formatDate($data->birthDate)'),
-        'source',
+        array('name' => 'source', 'value' => '$data->src->name'),
+        array('name' => 'sourceId', 'value' => '$data->sourceId!=0?$data->sourceId:Yii::t("common","NotKnown")'),
         'sex',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',

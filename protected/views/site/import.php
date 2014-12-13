@@ -23,18 +23,33 @@ $this->widget('ext.bootstrap.widgets.TbModal', array(
         'data-toggle' => 'modal',
         'data-target' => '#myModal'));
     ?> </div >
-<!--    Xml files must be formed like <?php //echo CHtml::link(Yii::t('common', 'thisFile'), '', array('style' => ' font-weight: bold;', 'target' => "blank",'onclick'=>''));                                          ?> </div >-->
+<!--    Xml files must be formed like <?php //echo CHtml::link(Yii::t('common', 'thisFile'), '', array('style' => ' font-weight: bold;', 'target' => "blank",'onclick'=>''));                                                   ?> </div >-->
 <p>
-<form  id="xmlImported" name="importedXml" method="post" action="" enctype="multipart/form-data"  >
-    XML file to import : <input type="file" id='fileToImport'  name="fileToImport[]" multiple onchange="makeFileList();" style="display: none;" accept="application/xml" ><br>
+    <!--<form  id="xmlImported" name="importedXml" method="post" action="" enctype="multipart/form-data"  >
+        XML file to import : <input type="file" id='fileToImport'  name="fileToImport[]" multiple onchange="makeFileList();" style="display: none;" accept="application/xml" ><br>
 
-    <input type="button" value="Browse..." onclick="document.getElementById('fileToImport').click();" />
-    <ul id="nameList">
-        <li>No file selected</li>
-    </ul>
+        <input type="button" value="Browse..." onclick="document.getElementById('fileToImport').click();" />
+        <ul id="nameList">
+            <li>No file selected</li>
+        </ul>
 
-    <input type="submit" name="submit" >
-</form>
+        <input type="submit" name="submit" >
+    </form>-->
+
+
+    <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL, '', 'post', array('enctype' => "multipart/form-data", 'id' => "xmlImported", 'name' => "importedXml")); ?>
+<fieldset>
+
+    <?php
+    echo TbHtml::fileFieldControlGroup("fileToImport[]", '', array('id' => 'fileToImport', 'multiple' => 'true', 'onchange' => 'makeFileList();', "accept" => "application/xml"));
+
+    echo TbHtml::formActions(array(
+        TbHtml::submitButton('Submit', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+    ));
+    ?>
+
+</fieldset>
+<?php echo TbHtml::endForm(); ?>
 
 </p>
 

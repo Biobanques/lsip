@@ -21,5 +21,6 @@ return array(
     'longTimeMessage' => "Cette opération peut prendre plusieurs minutes. Continuer?",
     "xmlUpload" => "Charger des fichiers xml",
     "thisFile" => "ce fichier",
+    'NotKnown' => "Non renseigné",
 );
 
