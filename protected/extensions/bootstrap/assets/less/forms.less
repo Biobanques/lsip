@@ -42,7 +42,7 @@ input,
 button,
 select,
 textarea {
-  #font>.shorthand(@baseFontSize,normal,@baseLineHeight); // Set size, weight, line-height here
+  #font > .shorthand(@baseFontSize,normal,@baseLineHeight); // Set size, weight, line-height here
 }
 input,
 button,
@@ -233,8 +233,8 @@ textarea {
 }
 
 // Move the options list down to align with labels
-.controls>.radio:first-child,
-.controls>.checkbox:first-child {
+.controls > .radio:first-child,
+.controls > .checkbox:first-child {
   padding-top: 5px; // has to be padding because margin collaspes
 }
 
@@ -298,7 +298,7 @@ textarea[class*="span"],
 // ----------------------
 
 // Grid sizes
-#grid>.input(@gridColumnWidth, @gridGutterWidth);
+#grid > .input(@gridColumnWidth, @gridGutterWidth);
 
 // Control row for multiple inputs per line
 .controls-row {
@@ -466,7 +466,7 @@ select:focus:invalid {
   }
   .add-on,
   .btn,
-  .btn-group>.dropdown-toggle {
+  .btn-group > .dropdown-toggle {
     vertical-align: top;
     .border-radius(0);
   }
@@ -504,7 +504,7 @@ select:focus:invalid {
   }
   .add-on:last-child,
   .btn:last-child,
-  .btn-group:last-child>.dropdown-toggle {
+  .btn-group:last-child > .dropdown-toggle {
     .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
   }
 }

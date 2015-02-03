@@ -7,6 +7,9 @@
  * @package bootstrap.behaviors
  */
 
+Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.components.TbApi');
+
 /**
  * Bootstrap widget behavior.
  * @property $owner CWidget

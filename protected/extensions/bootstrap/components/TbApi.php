@@ -5,7 +5,7 @@
  * @copyright Copyright &copy; Christoffer Niska 2013-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package bootstrap.components
- * @version 1.2.0
+ * @version 1.0.0
  */
 
 /**
@@ -43,23 +43,21 @@ class TbApi extends CApplicationComponent
     /**
      * Registers the Bootstrap CSS.
      * @param string $url the URL to the CSS file to register.
-     * @param string $media the media type.
      */
-    public function registerCoreCss($url = null, $media = '')
+    public function registerCoreCss($url = null)
     {
         if ($url === null) {
             $fileName = YII_DEBUG ? 'bootstrap.css' : 'bootstrap.min.css';
             $url = $this->getAssetsUrl() . '/css/' . $fileName;
         }
-        Yii::app()->clientScript->registerCssFile($url, $media);
+        Yii::app()->clientScript->registerCssFile($url);
     }
 
     /**
      * Registers the responsive Bootstrap CSS.
      * @param string $url the URL to the CSS file to register.
-     * @param string $media the media type (defaults to 'screen').
      */
-    public function registerResponsiveCss($url = null, $media = 'screen')
+    public function registerResponsiveCss($url = null)
     {
         if ($url === null) {
             $fileName = YII_DEBUG ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css';
@@ -68,21 +66,22 @@ class TbApi extends CApplicationComponent
         /** @var CClientScript $cs */
         $cs = Yii::app()->getClientScript();
         $cs->registerMetaTag('width=device-width, initial-scale=1.0', 'viewport');
-        $cs->registerCssFile($url, $media);
+        $cs->registerCssFile($url);
     }
 
     /**
      * Registers the Yiistrap CSS.
      * @param string $url the URL to the CSS file to register.
-     * @param string $media the media type.
      */
-    public function registerYiistrapCss($url = null, $media = '')
+    public function registerYiistrapCss($url = null)
     {
         if ($url === null) {
             $fileName = YII_DEBUG ? 'yiistrap.css' : 'yiistrap.min.css';
             $url = $this->getAssetsUrl() . '/css/' . $fileName;
         }
-        Yii::app()->getClientScript()->registerCssFile($url, $media);
+        /** @var CClientScript $cs */
+        $cs = Yii::app()->getClientScript();
+        $cs->registerCssFile($url);
     }
 
     /**
@@ -190,17 +189,20 @@ class TbApi extends CApplicationComponent
      */
     public function registerEvents($selector, $events, $position = CClientScript::POS_END)
     {
-        if (!empty($events)) {
-            $script = '';
-            foreach ($events as $name => $handler) {
-                if (!$handler instanceof CJavaScriptExpression) {
-                    $handler = new CJavaScriptExpression($handler);
-                }
-                $script .= "jQuery('{$selector}').on('{$name}', {$handler});";
-            }
-            $id = __CLASS__ . '#Events' . self::$counter++;
-            Yii::app()->clientScript->registerScript($id, $script, $position);
+        if (empty($events)) {
+            return;
         }
+
+        $script = '';
+        foreach ($events as $name => $handler) {
+            $handler = ($handler instanceof CJavaScriptExpression)
+                ? $handler
+                : new CJavaScriptExpression($handler);
+
+            $script .= "jQuery('{$selector}').on('{$name}', {$handler});";
+        }
+        $id = __CLASS__ . '#Events' . self::$counter++;
+        Yii::app()->clientScript->registerScript($id, $script, $position);
     }
 
     /**

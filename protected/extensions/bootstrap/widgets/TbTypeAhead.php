@@ -7,6 +7,9 @@
  * @package bootstrap.widgets
  */
 
+Yii::import('bootstrap.behaviors.TbWidget');
+Yii::import('bootstrap.helpers.TbHtml');
+
 /**
  * Bootstrap typeahead widget.
  */

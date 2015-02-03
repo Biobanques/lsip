@@ -9,6 +9,8 @@
  */
 
 Yii::import('zii.widgets.grid.CGridView');
+Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.widgets.TbDataColumn');
 
 /**
  * Bootstrap Zii grid view.
@@ -21,6 +23,10 @@ class TbGridView extends CGridView
      * TbHtml::GRID_TYPE_HOVER.
      */
     public $type;
+    /**
+     * @var string the CSS class name for the pager container. Defaults to 'pagination'.
+     */
+    public $pagerCssClass = 'pagination';
     /**
      * @var array the configuration for the pager.
      * Defaults to <code>array('class'=>'ext.bootstrap.widgets.TbPager')</code>.

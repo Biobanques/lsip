@@ -7,6 +7,9 @@
  * @package bootstrap.widgets
  */
 
+Yii::import('bootstrap.helpers.TbHtml');
+Yii::import('bootstrap.widgets.TbListView');
+
 /**
  * Bootstrap thumbnails widget.
  * http://twitter.github.com/bootstrap/components.html#thumbnails

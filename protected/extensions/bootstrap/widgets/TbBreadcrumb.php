@@ -6,6 +6,8 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
 
+Yii::import('bootstrap.helpers.TbHtml');
+
 /**
  * Bootstrap breadcrumb widget.
  * @see http://twitter.github.com/bootstrap/components.html#breadcrumbs
@@ -59,7 +61,7 @@ class TbBreadcrumb extends CWidget
                 $links[$label] = $this->homeUrl !== null ? $this->homeUrl : Yii::app()->homeUrl;
             }
             foreach ($this->links as $label => $url) {
-                if (is_string($label) || is_array($url)) {
+                if (is_string($label)) {
                     if ($this->encodeLabel) {
                         $label = CHtml::encode($label);
                     }

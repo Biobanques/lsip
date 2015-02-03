@@ -7,8 +7,10 @@
  * @package bootstrap.widgets
  */
 
+Yii::import('bootstrap.behaviors.TbWidget');
+
 /**
- * Bootstrap tabs widget.
+ * Boostrap tabs widget.
  */
 class TbTabs extends CWidget
 {
