@@ -19,5 +19,6 @@ return array(
     'infoContent' => 'You can search patients from advanced criteria by clicking on \'Advanced search \' link above.'
     . '<br>'
     . 'By clicking at pictures at end of the lines, you can update or delete patients.',
+    'update' => 'Update patient n.'
 );
 

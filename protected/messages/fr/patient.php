@@ -19,4 +19,5 @@ return array(
     'infoContent' => 'Vous pouvez recherchez les patients selon des critères avancées en cliquant sur le lien \'recherche avancée\' ci-dessous.'
     . '<br>'
     . 'En cliquant sur les images en fin de ligne, vous pouvez modifier ou supprimer des patients.',
+    'update' => 'Mettre à jour le patient n°'
 );
