@@ -12,6 +12,6 @@ $this->menu = array(
 );
 ?>
 
-<h1>Create User</h1>
+<h2><?php echo Yii::t('user', 'create'); ?></h2>
 
 <?php $this->renderPartial('_form', array('model' => $model)); ?>

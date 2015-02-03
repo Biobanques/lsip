@@ -51,12 +51,12 @@ class User extends CActiveRecord
      */
     public function attributeLabels() {
         return array(
-            'id' => 'Id',
-            'nom' => 'Nom',
-            'prenom' => 'Prenom',
-            'profil' => 'Profil',
-            'login' => 'Login',
-            'password' => 'Password',
+            'id' => Yii::t('user', 'id'),
+            'nom' => Yii::t('user', 'nom'),
+            'prenom' => Yii::t('user', 'prenom'),
+            'profil' => Yii::t('user', 'profil'),
+            'login' => Yii::t('user', 'login'),
+            'password' => Yii::t('user', 'password'),
         );
     }
 
@@ -97,6 +97,17 @@ class User extends CActiveRecord
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function getFullName() {
+        return "$this->prenom $this->nom";
+    }
+
+    public function getProfilsLabels() {
+        $result = array(1 => Yii::t('user', 'sipAdmin'),
+            2 => Yii::t('user', 'srcAdmin'),
+            3 => Yii::t('user', 'simpleUser'));
+        return $result;
     }
 
 }

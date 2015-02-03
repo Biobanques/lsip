@@ -21,7 +21,7 @@ $this->breadcrumbs = array(
 
     <fieldset>
 
-        <legend>Please fill out the following form with your login credentials:</legend>
+        <legend><?php echo Yii::t('common', 'fillLoginFormMessage'); ?></legend>
 
         <?php echo $form->textFieldControlGroup($model, 'username');
         ?>
@@ -37,8 +37,8 @@ $this->breadcrumbs = array(
 
 <?php
 echo TbHtml::formActions(array(
-    TbHtml::submitButton('Submit', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
-    TbHtml::resetButton('Reset'),
+    TbHtml::submitButton(Yii::t('common', 'connect'), array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+    TbHtml::resetButton(Yii::t('common', 'reset')),
 ));
 ?>
 

@@ -22,5 +22,12 @@ return array(
     "xmlUpload" => "Charger des fichiers xml",
     "thisFile" => "ce fichier",
     'NotKnown' => "Non renseigné",
+    'fillLoginFormMessage' => 'Merci de renseigner vos identifiants et mots de passe : ',
+    'reset' => 'Annuler',
+    'advancedSearch' => 'Recherche avancée',
+    'xmlUploadInfoTitle' => 'Comment charger manuellement de nouveaux patients?',
+    'xmlUploadInfoContent' => 'Vous pouvez charger des fichiers xml sur le serveur.<br>
+        Le xml doit être formatté comme dans fileLink. <br>
+        Les fichiers chargés de cette manière seront ajoutés dans le système par l\'administrateur du SIP.',
 );
 

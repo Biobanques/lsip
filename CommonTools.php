@@ -40,12 +40,18 @@ class CommonTools
      * @param string $source
      * @return string
      */
-    public static function formatDate($source, $lang = 'french') {
+    public static function formatDate($source, $lang = 'fr') {
         $dateSource = strtotime($source);
-        if ($lang == 'french')
-            $formatedDate = date('d-m-Y', $dateSource);
-        if ($lang == 'mysql')
-            $formatedDate = date('Y-m-d', $dateSource);
+        switch ($lang) {
+            case 'fr': $formatedDate = date('d/m/Y', $dateSource);
+                break;
+            case 'en': $formatedDate = date('Y-m-d', $dateSource);
+                break;
+            case 'mysql': $formatedDate = date('Y-m-d', $dateSource);
+                break;
+            default : $formatedDate = date('Y-m-d', $dateSource);
+                break;
+        }
         return $formatedDate;
     }
 

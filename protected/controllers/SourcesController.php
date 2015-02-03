@@ -6,7 +6,7 @@ class SourcesController extends Controller
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    public $layout = '//layouts/column2';
+    // public $layout = '//layouts/column1';
 
     /**
      * @return array action filters
@@ -79,8 +79,12 @@ class SourcesController extends Controller
 
         if (isset($_POST['Sources'])) {
             $model->attributes = $_POST['Sources'];
+            if (isset($_POST['Sources']['admin0']))
+                $model->admin = $_POST['Sources']['admin0'];
+            if (isset($_POST['Sources']['webapp0']))
+                $model->webapp = $_POST['Sources']['webapp0'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('admin'));
         }
 
         $this->render('update', array(

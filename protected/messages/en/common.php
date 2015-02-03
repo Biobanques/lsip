@@ -22,5 +22,12 @@ return array(
     "xmlUpload" => "Upload xml files",
     "thisFile" => "this one",
     'NotKnown' => "Not available",
+    'fillLoginFormMessage' => 'Please fill out the following form with your login credentials',
+    'reset' => 'Cancel',
+    'advancedSearch' => 'Advanced search',
+    'xmlUploadInfoTitle' => 'How to manually upload new patients ?',
+    'xmlUploadInfoContent' => 'You can upload xml files on server.<br>
+        Xml must be formed like in fileLink. <br>
+        Files loaded in this way will be added in the system by the SIP administrator.',
 );
 

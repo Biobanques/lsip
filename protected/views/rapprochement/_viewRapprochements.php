@@ -3,10 +3,6 @@
 /* @var $data Rapprochement */
 ?>
 
-
-
-
-
 <div class="panel
 <?php echo ($data->ratio == 100) ? 'panel-success' : ($data->ratio >= 75 && $data->ratio < 100 ? 'panel-warning' : 'panel-danger'); ?>
      ">
@@ -15,6 +11,7 @@
             <?php echo $data->validated == 1 && $data->validated != NULL ? Yii::t('rapprochement', 'annule') : (($data->validated == 0 || $data->validated == NULL) ? Yii::t('rapprochement', 'attente') : Yii::t('rapprochement', 'valide')); ?>
             <br><?php echo Yii::t('rapprochement', 'correspondance') . " :  $data->ratio %" ?>
         </h3>
+
     </div>
     <div class="panel-body">
         <div class="view" id="<?php echo $data->idRapprochement; ?>" >

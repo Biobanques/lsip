@@ -39,13 +39,14 @@ class Patient extends CActiveRecord
         return array(
             array('birthName, firstName, birthDate, source, sex', 'required'),
             array('id', 'required', 'on' => 'save'),
-            array('birthName, firstName, source, birthPlace', 'length', 'max' => 255),
+            array('birthName, firstName, birthPlace', 'length', 'max' => 255),
+            array('source', 'numerical', 'integerOnly' => true),
             array('sex', 'length', 'max' => 1),
             array('sourceId,birthPlace', 'length', 'allowEmpty' => true),
             array('birthDate', 'date', 'format' => CommonTools::getValidDateFormats()),
 //            // The following rule is used by search().
 //            // @todo Please remove those attributes that should not be searched.
-            array('id,  useName, firstName, birthDate, source,sourceId, sex,birthPlace', 'safe', 'on' => 'search'),
+            array('id,  useName, firstName, birthDate, source, src, sourceId, sex, birthPlace', 'safe', 'on' => 'search'),
         );
     }
 
@@ -73,6 +74,7 @@ class Patient extends CActiveRecord
             'source' => Yii::t('patient', 'source'),
             'birthPlace' => Yii::t('patient', 'birthPlace'),
             'sex' => Yii::t('patient', 'sex'),
+            'sourceId' => Yii::t('patient', 'sourceId')
         );
     }
 
@@ -92,14 +94,15 @@ class Patient extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->with = array('src');
         $criteria->compare('id', $this->id);
         $criteria->compare('birthName', $this->birthName, false);
         $criteria->compare('useName', $this->useName, false);
         $criteria->compare('firstName', $this->firstName, false);
         $criteria->compare('birthDate', $this->birthDate, false);
-        $criteria->compare('source', $this->source, false);
+        $criteria->compare('source', $this->src, false);
         $criteria->compare('sex', $this->sex, false);
+
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -147,6 +150,24 @@ class Patient extends CActiveRecord
     public function afterValidate() {
         $this->birthDate = CommonTools::formatDate($this->birthDate, 'mysql');
         return parent::afterValidate();
+    }
+
+    public function beforeValidate() {
+        $this->birthDate = CommonTools::formatDate($this->birthDate, 'mysql');
+        return parent::beforeValidate();
+    }
+
+    public function afterFind() {
+        $this->birthDate = CommonTools::formatDate($this->birthDate, Yii::app()->language);
+        return parent::beforeValidate();
+    }
+
+    public function getSexValues() {
+        return array(
+            'M' => Yii::t('patient', 'sex_m'),
+            'F' => Yii::t('patient', 'sex_f'),
+            'U' => Yii::t('patient', 'sex_u'),
+        );
     }
 
 }

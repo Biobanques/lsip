@@ -7,6 +7,8 @@ return array(
     "annule" => "Canceled",
     "valide" => "Validated",
     "attente" => "Waiting",
-    "fusions" => "Fusions"
+    "fusions" => "Fusions",
+    "infoTitle" => "How to manage typeRapprochements?",
+    "infoContent" => "Here you can confirm, cancel or put on hold typeRapprochements, and sort them by status or by match rate.",
 );
 

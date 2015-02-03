@@ -131,6 +131,7 @@ class PatientController extends Controller
         if (isset($_GET['Patient']))
             $model->attributes = $_GET['Patient'];
 
+
         $this->render('admin', array(
             'model' => $model,
         ));

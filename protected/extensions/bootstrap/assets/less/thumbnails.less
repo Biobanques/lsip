@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 
-// Note: `.thumbnails` and `.thumbnails > li` are overriden in responsive files
+// Note: `.thumbnails` and `.thumbnails>li` are overriden in responsive files
 
 // Make wrapper ul behave like the grid
 .thumbnails {
@@ -17,7 +17,7 @@
 }
 
 // Float li to make thumbnails appear in a row
-.thumbnails > li {
+.thumbnails>li {
   float: left; // Explicity set the float since we don't require .span* classes
   margin-bottom: @baseLineHeight;
   margin-left: @gridGutterWidth;
@@ -41,7 +41,7 @@ a.thumbnail:focus {
 }
 
 // Images and captions
-.thumbnail > img {
+.thumbnail>img {
   display: block;
   max-width: 100%;
   margin-left: auto;

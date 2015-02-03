@@ -14,32 +14,23 @@ $this->widget('ext.bootstrap.widgets.TbModal', array(
     ),
 ));
 ?>
-<h1><?php echo Yii::t('common', 'xmlUpload') ?></h1>
-<div style="width: 100%;border: 1px;border-color: blue; border-style: solid;"  >
-    You can upload XML files from here. <br>
-    Xml files must be formed like <?php
-    echo CHtml::link(Yii::t('common', 'thisFile'), ' ', array(
-        'style' => ' font-weight: bold;',
-        'data-toggle' => 'modal',
-        'data-target' => '#myModal'));
-    ?> </div >
-<!--    Xml files must be formed like <?php //echo CHtml::link(Yii::t('common', 'thisFile'), '', array('style' => ' font-weight: bold;', 'target' => "blank",'onclick'=>''));                                                   ?> </div >-->
+<h2><?php echo Yii::t('common', 'xmlUpload') ?></h2>
+<div class="info"  ><div class="title">
+        <?php echo Yii::t('common', 'xmlUploadInfoTitle'); ?>
+    </div>
+    <div class="content">
+        <?php
+        $fileLink = CHtml::link(Yii::t('common', 'thisFile'), ' ', array(
+                    'style' => ' font-weight: bold; color:black',
+                    'data-toggle' => 'modal',
+                    'data-target' => '#myModal'));
+        echo Yii::t('common', 'xmlUploadInfoContent', array('fileLink' => $fileLink));
+        ?>
+    </div>
+</div >
 <p>
-    <!--<form  id="xmlImported" name="importedXml" method="post" action="" enctype="multipart/form-data"  >
-        XML file to import : <input type="file" id='fileToImport'  name="fileToImport[]" multiple onchange="makeFileList();" style="display: none;" accept="application/xml" ><br>
-
-        <input type="button" value="Browse..." onclick="document.getElementById('fileToImport').click();" />
-        <ul id="nameList">
-            <li>No file selected</li>
-        </ul>
-
-        <input type="submit" name="submit" >
-    </form>-->
-
-
     <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL, '', 'post', array('enctype' => "multipart/form-data", 'id' => "xmlImported", 'name' => "importedXml")); ?>
 <fieldset>
-
     <?php
     echo TbHtml::fileFieldControlGroup("fileToImport[]", '', array('id' => 'fileToImport', 'multiple' => 'true', 'onchange' => 'makeFileList();', "accept" => "application/xml"));
 
@@ -47,7 +38,6 @@ $this->widget('ext.bootstrap.widgets.TbModal', array(
         TbHtml::submitButton('Submit', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
     ));
     ?>
-
 </fieldset>
 <?php echo TbHtml::endForm(); ?>
 

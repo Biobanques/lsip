@@ -12,9 +12,11 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'firstName',
         array('name' => 'birthDate', 'value' => CommonTools::formatDate($model->birthDate)),
         array(
-            'label' => 'Source',
+            'name' => 'source',
             'value' => $model->src->name),
-        'sex',
+        array(
+            'name' => 'sex', 'name' => 'source',
+            'value' => $model->getSexValues()[$model->sex]),
     ),
 ));
 ?>

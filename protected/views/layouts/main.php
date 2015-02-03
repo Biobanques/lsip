@@ -8,6 +8,10 @@
         echo Yii::app()->request->baseUrl;
         ;
         ?>/css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="<?php
+        echo Yii::app()->request->baseUrl;
+        ;
+        ?>/css/custom.css" />
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <?php Yii::app()->bootstrap->register(); ?>
     </head>
@@ -46,39 +50,39 @@
 
 
         <span>
-<?php
-/**
- * Affichage des liens de traduction en gardant le couple controlleur/action et les parametres d'origine.
- */
-$controler = Yii::app()->getController()->getId();
-$action = Yii::app()->getController()->getAction()->getId();
-echo CHtml::link(
-        CHtml::image(Yii::app()->request->baseUrl . '/images/fr.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "fr"))
-        )
-//                        ,                      $htmlOptions
-);
-echo CHtml::link(
-        CHtml::image(Yii::app()->request->baseUrl . '/images/gb.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "en")))
-        , array('style' => "padding-left: 10px;")
-);
-?>
-        </span>
             <?php
-            $this->widget('bootstrap.widgets.TbAlert', array(
-                'block' => true,
-                'fade' => true,
-                'closeText' => '&times;', // false equals no close link
-                'events' => array(),
-                'htmlOptions' => array(),
-                'alerts' => array(// configurations per alert type
-                    // success, info, warning, error or danger
-                    'success' => array('closeText' => '&times;'),
-                    'info', // you don't need to specify full config
-                    'warning' => array('block' => false, 'closeText' => false),
-                    'error' => array('block' => false)
-                ),
-            ));
+            /**
+             * Affichage des liens de traduction en gardant le couple controlleur/action et les parametres d'origine.
+             */
+            $controler = Yii::app()->getController()->getId();
+            $action = Yii::app()->getController()->getAction()->getId();
+            echo CHtml::link(
+                    CHtml::image(Yii::app()->request->baseUrl . '/images/fr.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "fr"))
+                    )
+//                        ,                      $htmlOptions
+            );
+            echo CHtml::link(
+                    CHtml::image(Yii::app()->request->baseUrl . '/images/gb.png'), Yii::app()->createUrl("$controler/$action", array_merge($_GET, array('lang' => "en")))
+                    , array('style' => "padding-left: 10px;")
+            );
             ?>
+        </span>
+        <?php
+        $this->widget('bootstrap.widgets.TbAlert', array(
+            'block' => true,
+            'fade' => true,
+            'closeText' => '&times;', // false equals no close link
+            'events' => array(),
+            'htmlOptions' => array(),
+            'alerts' => array(// configurations per alert type
+                // success, info, warning, error or danger
+                'success' => array('closeText' => '&times;'),
+                'info', // you don't need to specify full config
+                'warning' => array('block' => false, 'closeText' => false),
+                'error' => array('block' => false)
+            ),
+        ));
+        ?>
 
         <?php echo $content; ?>
 
@@ -88,7 +92,7 @@ echo CHtml::link(
             Lsip v. 1.0<br/>
             Copyright &copy; <?php echo date('Y'); ?> by Biobanques.<br/>
             All Rights Reserved.<br/>
-        <?php echo Yii::powered(); ?>
+            <?php echo Yii::powered(); ?>
         </div><!-- footer -->
 
         </div><!-- page -->

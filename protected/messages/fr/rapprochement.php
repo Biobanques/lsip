@@ -7,6 +7,8 @@ return array(
     "annule" => "Annulé",
     "valide" => "Validé",
     "attente" => "En attente",
-    "fusions" => "Fusions"
+    "fusions" => "Fusions",
+    "infoTitle" => "Comment gérer les typeRapprochements?",
+    "infoContent" => "Vous pouvez ici valider, annuler ou mettre en attente les typeRapprochements, ainsi que les trier par status ou par taux de correspondance. ",
 );
 
