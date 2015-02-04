@@ -128,7 +128,7 @@ class SiteController extends Controller
         $this->redirect(Yii::app()->createUrl('rapprochement/manageRapprochements'));
     }
 
-    public function actionXmlImport() {
+    public function actionXmlImport($doImport = false) {
         $count = 0;
 
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
@@ -146,7 +146,8 @@ class SiteController extends Controller
                     }
                 }
             }
-            $this->doImport();
+            if ($doImport)
+                $this->doImport();
         }
         $this->render('import');
     }
@@ -186,7 +187,6 @@ class SiteController extends Controller
     }
 
     public function actionChangeBD() {
-        //Rapprochement::model()->deleteAll();
         $patients = Patient::model()->findAll();
         foreach ($patients as $patient) {
             $bd = strtotime($patient->birthDate);

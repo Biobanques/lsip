@@ -17,9 +17,9 @@ return array(
     "password" => "Mot de passe",
     "rememberMe" => "Se souvenir de moi",
     "required" => "Les champs avec <span class=\"required\">*</span> sont obligatoires.",
-    "massImport" => "Import XML",
+    "massImport" => "Importer les fichiers XML dans la base",
     'longTimeMessage' => "Cette opération peut prendre plusieurs minutes. Continuer?",
-    "xmlUpload" => "Charger des fichiers xml",
+    "xmlUpload" => "Télécharger des fichiers de patients",
     "thisFile" => "ce fichier",
     'NotKnown' => "Non renseigné",
     'fillLoginFormMessage' => 'Merci de renseigner vos identifiants et mots de passe : ',
@@ -29,5 +29,6 @@ return array(
     'xmlUploadInfoContent' => 'Vous pouvez charger des fichiers xml sur le serveur.<br>
         Le xml doit être formatté comme dans fileLink. <br>
         Les fichiers chargés de cette manière seront ajoutés dans le système par l\'administrateur du SIP.',
+    'importFileExampleModalHeader' => 'Modèle de fichier xml valide.'
 );
 

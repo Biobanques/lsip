@@ -17,9 +17,9 @@ return array(
     "password" => "Password",
     "rememberMe" => "Remember me",
     "required" => "Fields with <span class=\"required\">*</span> are required.",
-    "massImport" => "Import XML",
+    "massImport" => "Import XML files into database",
     'longTimeMessage' => "This may take several minutes. Continue ?",
-    "xmlUpload" => "Upload xml files",
+    "xmlUpload" => "Upload patients files",
     "thisFile" => "this one",
     'NotKnown' => "Not available",
     'fillLoginFormMessage' => 'Please fill out the following form with your login credentials',
@@ -29,5 +29,6 @@ return array(
     'xmlUploadInfoContent' => 'You can upload xml files on server.<br>
         Xml must be formed like in fileLink. <br>
         Files loaded in this way will be added in the system by the SIP administrator.',
+    'importFileExampleModalHeader' => 'Model of valid xml file.'
 );
 

@@ -6,8 +6,8 @@ $this->pageTitle = Yii::app()->name;
 ?>
 <?php
 $this->widget('ext.bootstrap.widgets.TbModal', array(
-    'id' => 'myModal',
-    'header' => 'Modal Heading',
+    'id' => 'fileExampleModal',
+    'header' => Yii::t('common', 'importFileExampleModalHeader'),
     'content' => "<div><pre>" . htmlspecialchars(file_get_contents(Yii::app()->basePath . '/data/examples/upload.xml'), ENT_QUOTES) . "</pre></div>",
     'footer' => array(
         TbHtml::button('Close', array('data-dismiss' => 'modal')),
@@ -23,7 +23,7 @@ $this->widget('ext.bootstrap.widgets.TbModal', array(
         $fileLink = CHtml::link(Yii::t('common', 'thisFile'), ' ', array(
                     'style' => ' font-weight: bold; color:black',
                     'data-toggle' => 'modal',
-                    'data-target' => '#myModal'));
+                    'data-target' => '#fileExampleModal'));
         echo Yii::t('common', 'xmlUploadInfoContent', array('fileLink' => $fileLink));
         ?>
     </div>

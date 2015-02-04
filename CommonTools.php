@@ -120,4 +120,37 @@ class CommonTools
         return $patient;
     }
 
+    public static function getImportedFilesInfo() {
+
+        $listFilesInFolder = array();
+
+
+        if ($handle = opendir(CommonProperties::$MASS_IMPORT_FOLDER)) {
+            $filePresent = false;
+            while (false !== ($file = readdir($handle))) {
+
+                if ($file != "." && $file != ".." && strtolower(substr($file, strrpos($file, '.') + 1)) == 'xml') {
+                    $filePresent = true;
+                    $filePath = CommonProperties::$MASS_IMPORT_FOLDER . '/' . $file;
+                    $listFilesInFolder[] = array('name' => $file, 'size' => CommonTools::getFileSize(filesize($filePath)), 'lastModif' => CommonTools::formatDate(date('Y-m-d', filemtime($filePath)), Yii::app()->language));
+                }
+            }
+            closedir($handle);
+        }
+        return $filePresent ? $listFilesInFolder : null;
+    }
+
+    public static function getFileSize($fileSize) {
+        $result;
+        switch (true) {
+            case ($fileSize > 1024 * 1024):$result = round($fileSize / (1024 * 1024), 2) . ' Mo';
+                break;
+            case ($fileSize > 1024):$result = round($fileSize / (1024), 2) . ' ko';
+                break;
+            default: $result = $fileSize . ' o';
+                break;
+        }
+        return $result;
+    }
+
 }
