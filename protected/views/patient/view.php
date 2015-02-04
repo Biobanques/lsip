@@ -16,7 +16,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
             'name' => 'source',
             'value' => $model->src->name),
         array(
-            'name' => 'sex', 'name' => 'source',
+            'name' => 'sex',
             'value' => $arraySexValues[$model->sex]),
     ),
 ));

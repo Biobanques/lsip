@@ -31,6 +31,7 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php
+$arraySexValues = Patient::model()->getSexValues();
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'patient-grid',
     'type' => 'striped bordered condensed',
@@ -46,7 +47,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array('name' => 'birthDate', 'value' => 'CommonTools::formatDate($data->birthDate)'),
         array('name' => 'source', 'value' => '$data->src->name'),
         array('name' => 'sourceId', 'value' => '$data->sourceId!=0?$data->sourceId:Yii::t("common","NotKnown")'),
-        'sex',
+        array('name' => 'sex', 'value' => '$literalsex=$data->sexValues[$data->sex]'),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'htmlOptions' => array('style' => 'width: 50px'),

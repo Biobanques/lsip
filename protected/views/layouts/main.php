@@ -16,31 +16,35 @@
         <?php Yii::app()->bootstrap->register(); ?>
     </head>
     <body>
-
-        <?php
-        $this->widget('bootstrap.widgets.TbNavbar', array(
-            'htmlOptions' => array('id' => 'navBar'),
-            'items' => array(
-                array(
-                    'class' => 'bootstrap.widgets.TbNav',
-                    'items' => array(
-                        array('label' => Yii::t('common', 'managePatients'), 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'manageRapprochements'), 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'manageFusions'), 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
-                        array('label' => Yii::t('common', 'xmlUpload'), 'url' => array('/site/xmlImport'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'detectRapprochement'), 'url' => array('/site/detectRapprochement'), 'visible' => Yii::app()->user->isAdmin(), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
-                        array('label' => Yii::t('common', 'massImport'), 'url' => array('/site/massImport'), 'visible' => Yii::app()->user->isAdmin(), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
-                        array('label' => Yii::t('common', 'manageSources'), 'url' => array('/sources/admin'), 'visible' => Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'manageUsers'), 'url' => array('/user/admin'), 'visible' => Yii::app()->user->isAdmin()),
-                        array('label' => Yii::t('common', 'connect'), 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-                        array('label' => Yii::t('common', 'disconnect') . '(' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+        <div style="display: block">
+            <?php
+            $this->widget('bootstrap.widgets.TbNavbar', array(
+                'brandLabel' => Yii::app()->name,
+                'brandOptions' => array('style' => 'width:100%;'),
+                'htmlOptions' => array('id' => 'navBar'),
+                'items' => array(
+                    array(
+                        'class' => 'bootstrap.widgets.TbNav',
+                        'items' => array(
+                            array('label' => Yii::t('common', 'managePatients'), 'url' => array('/patient/admin'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
+                            array('label' => Yii::t('common', 'manageRapprochements'), 'url' => array('/rapprochement/manageRapprochements'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
+                            array('label' => Yii::t('common', 'manageFusions'), 'url' => array('/rapprochement/manageFusions'), 'visible' => Yii::app()->user->isAdmin() || Yii::app()->user->isBiobankAdmin()),
+                            array('label' => Yii::t('common', 'xmlUpload'), 'url' => array('/site/xmlImport'), 'visible' => Yii::app()->user->isBiobankAdmin() || Yii::app()->user->isAdmin()),
+//
+                            array('label' => 'Administration', 'visible' => Yii::app()->user->isAdmin(), 'items' => array(
+                                    array('label' => Yii::t('common', 'manageSources'), 'url' => array('/sources/admin')),
+                                    array('label' => Yii::t('common', 'manageUsers'), 'url' => array('/user/admin')), array('label' => Yii::t('common', 'detectRapprochement'), 'url' => array('/site/detectRapprochement'), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
+                                    array('label' => Yii::t('common', 'massImport'), 'url' => array('/site/massImport'), 'linkOptions' => array('onclick' => "return confirm('" . Yii::t('common', 'longTimeMessage') . "')")),
+                                )),
+                            array('label' => Yii::t('common', 'connect'), 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+                            array('label' => Yii::t('common', 'disconnect') . '(' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
+                        ),
                     ),
                 ),
-            ),
-        ));
-        ?>
+            ));
+            ?>
 
-
+        </div>
 
         <script type="text/javascript">
             var height = document.getElementById('navBar').offsetHeight + 5;
