@@ -1,5 +1,4 @@
--- init system admin user
-INSERT INTO `Users` ( `id`,`profil`, `login`, `password`) VALUES ('1','1','admin','lsip');
+
 
 INSERT INTO `Users` (`id`,`nom`,`prenom`,`profil`,`login`,`password`) VALUES ('2','admin_CRB_1','2','Adm_CRB1','crb1adm','crb1adm');
 INSERT INTO `Users` (`id`,`nom`,`prenom`,`profil`,`login`,`password`) VALUES ('3','webapp_CRB_1','3','WA_CRB1','crb1wa','crb1wa');

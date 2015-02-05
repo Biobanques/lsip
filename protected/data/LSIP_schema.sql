@@ -246,5 +246,7 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 SET FOREIGN_KEY_CHECKS=1;
--- Dump completed on 2014-10-15 17:19:49
 
+
+-- init system admin user
+INSERT INTO `Users` ( `id`,`profil`, `login`, `password`) VALUES ('1','1','admin','lsip');
