@@ -42,7 +42,7 @@
         </div>
         <div class="row">
             <?php echo $form->label($model, 'useName'); ?>
-            <?php echo $form->textField($model, 'source', array('size' => 60, 'maxlength' => 255)); ?>
+            <?php echo $form->textField($model, 'useName', array('size' => 60, 'maxlength' => 255)); ?>
         </div>
 
         <div class="row">

@@ -4,7 +4,10 @@ class massImportCommand extends CConsoleCommand
 {
 
     public function run($args) {
+
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (substr($folderSource, -1) != '/')
+            $folderSource.='/';
         chdir($folderSource);
         $files = array_filter(glob('*'), 'is_file');
         echo count($files) . " files detected \n";
@@ -129,6 +132,8 @@ class massImportCommand extends CConsoleCommand
      */
     public function csvToXml($filePath) {
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (substr($folderSource, -1) != '/')
+            $folderSource.='/';
         $folderTarget = $folderSource . 'saved/';
         $sourceFile = fopen($folderSource . $filePath, "r");
         //$outputFile = fopen($folderTarget . substr($filePath, 0, -3) . 'xml', 'w');

@@ -102,7 +102,7 @@ class SiteController extends Controller
             $model->attributes = $_POST['LoginForm'];
 // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
-                //Yii::app()->user->setFlash('success', 'Well logged');
+//Yii::app()->user->setFlash('success', 'Well logged');
                 $this->redirect(Yii::app()->createUrl('site/index'));
             } else {
                 Yii::app()->user->setFlash('error', Yii::t('common', 'errorLoginAlert'));
@@ -130,8 +130,9 @@ class SiteController extends Controller
 
     public function actionXmlImport($doImport = false) {
         $count = 0;
-
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (substr($folderSource, -1) != '/')
+            $folderSource.='/';
         if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST") {
             foreach ($_FILES['fileToImport']['name'] as $f => $name) {
                 if ($_FILES['fileToImport']['error'][$f] == 4) {
@@ -139,8 +140,8 @@ class SiteController extends Controller
                 }
                 if ($_FILES['fileToImport']['error'][$f] == 0) {
 
-                    // No error found! Move uploaded fileToImport
-                    if (move_uploaded_file($_FILES["fileToImport"]["tmp_name"][$f], $folderSource . $name)) {
+// No error found! Move uploaded fileToImport
+                    if (move_uploaded_file($_FILES["fileToImport"]["tmp_name"][$f], $folderSource . date('dmYHis') . '_' . $name)) {
 
                         $count++; // Number of successfully uploaded file
                     }
@@ -161,6 +162,8 @@ class SiteController extends Controller
     protected function doImport() {
         include 'CommonTools.php';
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (substr($folderSource, -1) != '/')
+            $folderSource.='/';
 
 
         chdir($folderSource);
@@ -168,7 +171,7 @@ class SiteController extends Controller
 
         foreach ($files as $importedFile) {
 
-            copy($importedFile, $folderSource . "saved/$importedFile");
+            copy($importedFile, $folderSource . "saved/saved_$importedFile");
 
 
             if (fnmatch('*.xml', $importedFile)) {

@@ -67,6 +67,8 @@ class CommonTools
 
     public static function analyzeAndRecreateXml($filePath) {
         $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (substr($folderSource, -1) != '/')
+            $folderSource.='/';
         $folderTarget = $folderSource . 'treated/';
         $file = simplexml_load_file($filePath);
         $outputXml = new SimpleXMLElement("<?xml version=\"1.0\"?><" . $file->getName() . "></" . $file->getName() . ">");
@@ -90,7 +92,7 @@ class CommonTools
                 }
             }
         }
-        $outputXml->asXML($folderTarget . $filePath);
+        $outputXml->asXML($folderTarget . 'treated_' . $filePath);
         unlink($filePath);
     }
 
@@ -123,15 +125,17 @@ class CommonTools
     public static function getImportedFilesInfo() {
 
         $listFilesInFolder = array();
+        $folderSource = CommonProperties::$MASS_IMPORT_FOLDER;
+        if (substr($folderSource, -1) != '/')
+            $folderSource.='/';
 
-
-        if ($handle = opendir(CommonProperties::$MASS_IMPORT_FOLDER)) {
+        if ($handle = opendir($folderSource)) {
             $filePresent = false;
             while (false !== ($file = readdir($handle))) {
 
                 if ($file != "." && $file != ".." && strtolower(substr($file, strrpos($file, '.') + 1)) == 'xml') {
                     $filePresent = true;
-                    $filePath = CommonProperties::$MASS_IMPORT_FOLDER . '/' . $file;
+                    $filePath = $folderSource . $file;
                     $listFilesInFolder[] = array('name' => $file, 'size' => CommonTools::getFileSize(filesize($filePath)), 'lastModif' => CommonTools::formatDate(date('Y-m-d', filemtime($filePath)), Yii::app()->language));
                 }
             }
