@@ -15,11 +15,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
- DROP TABLE IF EXISTS `users`;
+SET FOREIGN_KEY_CHECKS=0;
+ DROP TABLE IF EXISTS `Users`;
 -- /*!40101 SET @saved_cs_client     = @@character_set_client */;
 -- /*!40101 SET character_set_client = utf8 */;
- CREATE TABLE `users` (
+ CREATE TABLE `Users` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `nom` varchar(45) DEFAULT NULL,
    `prenom` varchar(45) DEFAULT NULL,
@@ -48,19 +48,19 @@
    PRIMARY KEY (`id`),
   KEY `fk_Sources_1_idx` (`admin`),
    KEY `fk_Sources_2_idx` (`webapp`),
-   CONSTRAINT `fk_Sources_1` FOREIGN KEY (`admin`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-   CONSTRAINT `fk_Sources_2` FOREIGN KEY (`webapp`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+   CONSTRAINT `fk_Sources_1` FOREIGN KEY (`admin`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT `fk_Sources_2` FOREIGN KEY (`webapp`) REFERENCES `Users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 -- /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Patient`
+-- Table structure for table `Patients`
 --
-SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS `Patient`;
+
+DROP TABLE IF EXISTS `Patients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Patient` (
+CREATE TABLE `Patients` (
   `id` int(10) NOT NULL,
   `birthName` varchar(100) NOT NULL,
   `useName` varchar(100) NOT NULL,
@@ -71,8 +71,8 @@ CREATE TABLE `Patient` (
 `birthPlace` varchar(45) default NULL,
   `sourceId` varchar(45) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `fk_Patient_Sources1_idx` (`source`),
-  CONSTRAINT `fk_Patient_Sources1` FOREIGN KEY (`source`) REFERENCES `Sources` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Patients_Sources1_idx` (`source`),
+  CONSTRAINT `fk_Patients_Sources1` FOREIGN KEY (`source`) REFERENCES `Sources` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -90,10 +90,10 @@ CREATE TABLE `Rapprochement` (
   `idPat2` int(11) NOT NULL,
   `validated` enum('0','1','2') NOT NULL DEFAULT '0',
   PRIMARY KEY (`idRapprochement`),
-  KEY `fk_Rapprochement_Patient1_idx` (`idPat1`),
-  KEY `fk_Rapprochement_Patient2_idx` (`idPat2`),
-  CONSTRAINT `fk_Rapprochement_Patient1` FOREIGN KEY (`idPat1`) REFERENCES `Patient` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Rapprochement_Patient2` FOREIGN KEY (`idPat2`) REFERENCES `Patient` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  KEY `fk_Rapprochement_Patients1_idx` (`idPat1`),
+  KEY `fk_Rapprochement_Patients2_idx` (`idPat2`),
+  CONSTRAINT `fk_Rapprochement_Patients1` FOREIGN KEY (`idPat1`) REFERENCES `Patients` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Rapprochement_Patients2` FOREIGN KEY (`idPat2`) REFERENCES `Patients` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -116,7 +116,7 @@ DROP temporary table  if exists tempPat;
 DROP temporary table  if exists   tempPat2;
 #5 criteres
 create temporary table tempPat as 
-select * from Patient p where(
+select * from Patients p where(
 p.birthName = birthName
 AND p.useName = useName
 AND p.firstName = firstName
@@ -125,14 +125,14 @@ AND p.sex = sex
 )
 # 4 criteres
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.useName = useName
 AND p.firstName = firstName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 
 AND p.firstName = firstName
@@ -140,21 +140,21 @@ AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.useName = useName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.useName = useName
 AND p.firstName = firstName
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.useName = useName
 AND p.firstName = firstName
@@ -162,74 +162,74 @@ AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate
 )
 #3 criteres
 UNION
-select  * from Patient p where (
+select  * from Patients p where (
 p.firstName = firstName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.useName = useName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
  p.useName = useName
 AND p.firstName = firstName
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
  p.useName = useName
 AND p.firstName = firstName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.firstName = firstName
 AND p.sex = sex
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.firstName = firstName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 )
 #UNION
-#select * from Patient p where (
+#select * from Patients p where (
 #p.birthName = birthName
 #AND p.useName = useName
 #AND p.sex = sex
 #)
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.useName = useName
 AND YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 )
 UNION
-select * from Patient p where (
+select * from Patients p where (
 p.birthName = birthName
 AND p.useName = useName
 AND p.firstName = firstName
 )
 ;
 /*
-select  id from Patient p where (p.source!=source AND
+select  id from Patients p where (p.source!=source AND
 YEAR(p.birthDate) = YEAR(birthdate) AND MONTH(p.birthDate) = MONTH(birthDate)
 );
 */
 
 create temporary table   tempPat2 as
-select tp.id from tempPat tp where tp.id not in (select idPat1 from Rapprochement where idPat2=id union select idPat2 from Rapprochement where idPat1 = id union select id from Patient p where p.id = id);
+select tp.id from tempPat tp where tp.id not in (select idPat1 from Rapprochement where idPat2=id union select idPat2 from Rapprochement where idPat1 = id union select id from Patients p where p.id = id);
 
 insert into Rapprochement (idPat1, idPat2) (select tp2.id,id from   tempPat2 tp2);
 END$$
@@ -248,5 +248,3 @@ DELIMITER ;
 SET FOREIGN_KEY_CHECKS=1;
 -- Dump completed on 2014-10-15 17:19:49
 
--- init first user
-INSERT INTO `users` ( profil, login, password) VALUES (1,'admin','lsip');
