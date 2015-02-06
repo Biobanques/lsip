@@ -42,7 +42,7 @@
     <div class="col_form">
         <div class="row">
             <?php echo $form->labelEx($model, 'birthDate'); ?>
-            <?php echo $form->dateField($model, 'birthDate'); ?>
+            <?php echo $form->textField($model, 'birthDate'); ?>
             <?php echo $form->error($model, 'birthDate'); ?>
         </div>
 

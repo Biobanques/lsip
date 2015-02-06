@@ -44,7 +44,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'useName',
         'firstName',
         'source',
-        'birthDate',
+        array('name' => 'birthDate', 'value' => 'CommonTools::formatDate($data->birthDate)'),
         array('name' => 'source', 'value' => '$data->src->name'),
         array('name' => 'sourceId', 'value' => '$data->sourceId!=0?$data->sourceId:Yii::t("common","NotKnown")'),
         array('name' => 'sex', 'value' => '$literalsex=$data->sexValues[$data->sex]'),

@@ -33,7 +33,7 @@ class WebUser extends CWebUser
      * @return boolean
      */
     public function isBiobankAdmin() {
-        return $this->getState('profil', '0') == 2;
+        return $this->getState('profil', '0') == 3;
     }
 
 //    /**
