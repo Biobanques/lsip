@@ -153,13 +153,15 @@ class Patient extends CActiveRecord
     }
 
     public function beforeValidate() {
+
+        $this->birthDate = str_replace('/', '-', $this->birthDate);
         $this->birthDate = CommonTools::formatDate($this->birthDate, 'mysql');
         return parent::beforeValidate();
     }
 
     public function afterFind() {
         $this->birthDate = CommonTools::formatDate($this->birthDate, Yii::app()->language);
-        return parent::beforeValidate();
+        return parent::afterFind();
     }
 
     public function getSexValues() {
