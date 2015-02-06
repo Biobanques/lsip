@@ -60,7 +60,6 @@ class CommonTools
             'yyyy-mm-dd',
             'dd-mm-yyyy',
             'dd/mm/yy',
-            'dd-mm-yyyy',
             'yyyymmdd'
         );
     }
