@@ -9,8 +9,14 @@
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="webapp_index">webapp_index</a></td></tr>
-<tr><td><a href="admin_patient_index">admin_patient_index</a></td></tr>
+<tr><td><a href="adm_sys_rapDetect">admin_sys_detect_rap</a></td></tr>
+<tr><td><a href="adm_sys_sources">admin_sys_sources_index</a></td></tr>
+<tr><td><a href="adm_sys_users">admin_sys_users_index</a></td></tr>
 <tr><td><a href="admin_index">admin_index</a></td></tr>
+<tr><td><a href="admin_patient_index">admin_patient_index</a></td></tr>
+<tr><td><a href="rapprochement_index">rapprochements_index</a></td></tr>
+<tr><td><a href="fusions_index">fusions_index</a></td></tr>
+<tr><td><a href="telecharger_deconnect">telecharger_deconnect</a></td></tr>
 </tbody></table>
 </body>
 </html>

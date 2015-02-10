@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/SIP/index.php" />
+<title>admin_sys_detect_rap</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">admin_sys_detect_rap</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/SIP/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LoginForm_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LoginForm_password</td>
+	<td>lsip</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Se déconnecter(admin)</td>
+	<td>Se déconnecter(admin)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Administration</td>
+	<td>Administration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=b.caret</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Gérer les sources</td>
+	<td>Gérer les sources</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Gérer les utilisateurs</td>
+	<td>Gérer les utilisateurs</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Détecter les rapprochements</td>
+	<td>Détecter les rapprochements</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Gérer les rapprochements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Gérer les rapprochements</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.empty</td>
+	<td>Aucun résultat trouvé.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Gérer les fusions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Gérer les fusions</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.empty</td>
+	<td>Aucun résultat trouvé.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Détecter les rapprochements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Cette opération peut prendre plusieurs minutes. Continuer?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=h3.panel-title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Gérer les fusions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=h3.panel-title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Gérer les rapprochements</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

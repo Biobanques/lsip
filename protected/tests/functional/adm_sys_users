@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/SIP/index.php" />
+<title>admin_sys_users_index</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">admin_sys_users_index</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/SIP/index.php?r=sources/admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Gérer les utilisateurs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Gestion des utilisateurs</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Créer un utilisateur</td>
+	<td>Créer un utilisateur</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=i.icon-trash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=i.icon-pencil</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Créer un utilisateur</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=User_login</td>
+	<td>sysAdminTest</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=User_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='user-grid']/table/tbody/tr[6]/td[5]</td>
+	<td>sysAdminTest</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=User_nom</td>
+	<td>name</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='user-grid']/table/tbody/tr[6]/td[7]/a/i</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=User_nom</td>
+	<td>nom</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=User_prenom</td>
+	<td>prenom</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Se déconnecter(admin)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LoginForm_username</td>
+	<td>sysAdminTest</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LoginForm_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Administration</td>
+	<td>Administration</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Se déconnecter(sysAdminTest)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LoginForm_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=LoginForm_password</td>
+	<td>lsip</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Gérer les utilisateurs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='user-grid']/table/tbody/tr[6]/td[7]/a[2]/i</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Voulez-vous vraiment supprimer cet élément ?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Se déconnecter(admin)</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/SIP/index.php" />
+<title>admin_sys_sources_index</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">admin_sys_sources_index</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/SIP/index.php?r=rapprochement/manageF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Gérer les sources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Gérer les sources</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Créer une nouvelle source</td>
+	<td>Créer une nouvelle source</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=i.icon-pencil</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=i.icon-trash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Créer une nouvelle source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Sources_name</td>
+	<td>sourceTest</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=Sources_admin0</td>
+	<td>label=Adm_CRB1 admin_CRB_1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=Sources_webapp0</td>
+	<td>label=WA_CRB1 webapp_CRB_1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Sources_passphrase</td>
+	<td>cryptPhrase</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='sources-grid']/table/tbody/tr[3]/td[2]</td>
+	<td>sourceTest</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='sources-grid']/table/tbody/tr[3]/td[6]/a/i</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Sources_name</td>
+	<td>sourceTestModified</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=yt0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='sources-grid']/table/tbody/tr[3]/td[2]</td>
+	<td>sourceTestModified</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='sources-grid']/table/tbody/tr[3]/td[6]/a[2]/i</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Voulez-vous vraiment supprimer cet élément ?</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
