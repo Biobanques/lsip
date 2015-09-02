@@ -159,8 +159,11 @@ class WebServiceController extends Controller
         $searchResult = $this->getWSPatient($patient);
         if (count($searchResult) == 1)
             $result = $searchResult[0]->id;
-        else
+        elseif (count($searchResult) == 0)
             $result = $this->addPatient($patient);
+        else {
+            throw new SoapFault('server', 'Many patient were found, please add details.');
+        }
         return $result;
     }
 
@@ -173,7 +176,7 @@ class WebServiceController extends Controller
         if ($patient->save())
             return $patient->id;
         else {
-            throw new SoapFault("Server", "No existing patient can be found. Please fill missing parameters to search");
+            throw new SoapFault("Server", "No existing patient can be found. Please fill missing parameters to add a new one.");
         }
     }
 
