@@ -63,7 +63,7 @@ class WebServiceController extends Controller
     public function getWSPatient($base) {
         $attributesArray = array();
         foreach ($base->attributes as $attributeName => $attributeValue) {
-            if ($attributeName != 'birthDate' && $attributeName != 'source')
+            if ($attributeName != 'birthDate' && $attributeName != 'sourceId' && $attributeName != 'source')
                 $attributeValue != null ? $attributesArray[$attributeName] = $attributeValue : null;
             elseif ($attributeName == 'birthDate') {
 
@@ -72,7 +72,9 @@ class WebServiceController extends Controller
                     $pat = new Patient();
                     $pat->birthDate = $attributeValue;
                     if ($pat->validate(array('birthDate')))
-                        $attributesArray[$attributeName] = date('Y-m-d', strtotime($attributeValue));
+                        $attributeValue = str_replace('/', '-', $attributeValue);
+                    $attributesArray[$attributeName] = date('Y-m-d', strtotime($attributeValue));
+//                        $attributesArray[$attributeName] = date('Y-m-d', $pat->birthDate);
                 }
             }
         }
@@ -115,6 +117,7 @@ class WebServiceController extends Controller
      * @param string sessionKey
      * @param WSPatient $patientBase
      * @return int id
+     * @soap
 
      *
      */
