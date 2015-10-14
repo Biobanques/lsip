@@ -170,6 +170,25 @@ class WebServiceController extends Controller
         return $result;
     }
 
+    /**
+     * @param string sessionKey
+     * @param WSPatient patient
+     * @return string id
+     * @soap
+     */
+    public function getFullPatientWs($sessionKey, $patient) {
+        $this->authenticateBySession($sessionKey);
+        $searchResult = $this->getWSPatient($patient);
+        if (count($searchResult) == 1)
+            $result = $searchResult[0];
+        elseif (count($searchResult) == 0)
+            $result = $this->addPatient($patient);
+        else {
+            throw new SoapFault('server', 'Many patient were found, please add details.');
+        }
+        return $result;
+    }
+
     public function addPatient($base) {
         $patient = new Patient();
         foreach ($base->attributes as $attrName => $attrValue)

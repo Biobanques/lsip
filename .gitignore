@@ -2,3 +2,11 @@
 /CommonProperties.php
 /protected/runtime/application.log
 /nbproject/private/
+/vendor/
+/wikis/
+/composer.lock
+/composer.json
+/protected/commands/docs/
+/devTools/
+/scripts/test.sh
+/protected/runtime/
