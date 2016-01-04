@@ -116,7 +116,7 @@ class WebServiceController extends Controller
 
      * @param string sessionKey
      * @param WSPatient $patientBase
-     * @return int id
+     * @return Patient $result
      * @soap
 
      *
@@ -182,23 +182,36 @@ class WebServiceController extends Controller
         if (count($searchResult) == 1)
             $result = $searchResult[0];
         elseif (count($searchResult) == 0)
-            $result = $this->addPatient($patient);
+//            $result = $this->addPatient($patient);
+            throw new SoapFault('NoPatient', 'No patient found, please create one.');
         else {
-            throw new SoapFault('server', 'Many patient were found, please add details.');
+            throw new SoapFault('ManyPatient', 'Many patient were found, please add details.');
         }
+
         return $result;
     }
 
     public function addPatient($base) {
+
         $patient = new Patient();
         foreach ($base->attributes as $attrName => $attrValue)
             $patient->$attrName = $attrValue;
+        //   $patient->id = 0;
+//        $patient->validate();
+        $patient->setScenario('save');
+        if ($patient->save()) {
+            $result = new WSPatient ();
+            $result->attributes = $patient->attributes;
+            return $result;
+        } else {
+            $listErrors = '';
+            foreach ($patient->getErrors()as $error) {
+                $listErrors.=', ' . $error[0];
+            }
 
-
-        if ($patient->save())
-            return $patient->id;
-        else {
-            throw new SoapFault("Server", "No existing patient can be found. Please fill missing parameters to add a new one.");
+            throw new SoapFault('PatientNotSaved', 'Patient can\'t be saved with given properties. '
+            . $listErrors
+            );
         }
     }
 

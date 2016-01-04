@@ -22,6 +22,7 @@ class Patient extends CActiveRecord
     public $source;
     public $birthPlace;
     public $sex;
+    public $id;
 
     /**
      * @return string the associated database table name
@@ -38,9 +39,9 @@ class Patient extends CActiveRecord
         // will receive user inputs.
         return array(
             array('birthName, firstName, birthDate, source, sex', 'required'),
-            array('id', 'required', 'on' => 'save'),
-            array('birthName, firstName, birthPlace', 'length', 'max' => 255),
-            array('source', 'numerical', 'integerOnly' => true),
+            array('id,birthDate', 'required', 'on' => 'save'),
+            array('birthName, firstName, birthPlace,useName', 'length', 'max' => 255),
+            array('id,source', 'numerical', 'integerOnly' => true),
             array('sex', 'length', 'max' => 1),
             array('sourceId,birthPlace', 'length', 'allowEmpty' => true),
             array('birthDate', 'date', 'format' => CommonTools::getValidDateFormats()),
@@ -119,6 +120,14 @@ class Patient extends CActiveRecord
         return parent::model($className);
     }
 
+//    public function validate($attributes = null, $clearErrors = true) {
+//        $id = rand(1000000, 2000000);
+//
+//        while (count(Patient::model()->find("id=$id")) != 0)
+//            $id = rand(1000000, 2000000);
+//        $this->id = $id;
+//        parent::validate($attributes, $clearErrors);
+//    }
     public function save($runValidation = true, $attributes = NULL) {
         $verified = false;
         $validated = true;
