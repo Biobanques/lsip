@@ -96,13 +96,27 @@ class Patient extends CActiveRecord
 
         $criteria = new CDbCriteria;
         $criteria->with = array('src');
-        $criteria->compare('id', $this->id);
-        $criteria->compare('birthName', $this->birthName, false);
-        $criteria->compare('useName', $this->useName, false);
-        $criteria->compare('firstName', $this->firstName, false);
-        $criteria->compare('birthDate', $this->birthDate, false);
-        $criteria->compare('source', $this->src, false);
-        $criteria->compare('sex', $this->sex, false);
+        if (isset($this->id) && !empty($this->id)) {
+            $criteria->compare('id', $this->id);
+        }
+        if (isset($this->birthName) && !empty($this->birthName)) {
+            $criteria->compare('birthName', $this->birthName, false);
+        }
+        if (isset($this->useName) && !empty($this->useName)) {
+            $criteria->compare('useName', $this->useName, false);
+        }
+        if (isset($this->firstName) && !empty($this->firstName)) {
+            $criteria->compare('firstName', $this->firstName, false);
+        }
+        if (isset($this->birthDate) && !empty($this->birthDate)) {
+            $criteria->compare('birthDate', date("Y-m-d", strtotime(str_replace('/', '-', $this->birthDate))), false);
+        }
+        if (isset($this->src) && !empty($this->src)) {
+            $criteria->compare('source', $this->src, false);
+        }
+        if (isset($this->sex) && !empty($this->sex)) {
+            $criteria->compare('sex', $this->sex, false);
+        }
 
 
         return new CActiveDataProvider($this, array(
@@ -135,7 +149,7 @@ class Patient extends CActiveRecord
 
 
             while (!$verified && $validated) {
-                $id = rand(1000000, 2000000);
+                $id = rand(0, 2000000);
                 $this->id = $id;
                 try {
                     $this->setScenario('save');

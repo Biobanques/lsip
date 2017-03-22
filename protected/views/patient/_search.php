@@ -54,7 +54,19 @@
 
         <div class="row">
             <?php echo $form->label($model, 'birthDate'); ?>
-            <?php echo $form->textField($model, 'birthDate'); ?>
+            <?php
+            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                'model' => $model,
+                'attribute' => 'birthDate',
+                'options' => array(
+                    'showAnim' => 'fold',
+                ),
+                'htmlOptions' => array(
+                    'placeholder' => 'Format jj/mm/aaaa'
+                ),
+                'language' => 'fr',
+            ));
+            ?>
         </div>
         <div class="row">
             <?php echo $form->label($model, 'sex'); ?>
